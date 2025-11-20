@@ -1,0 +1,127 @@
+
+.inicio-container {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  animation: backgroundPulse 5s infinite alternate;
+}
+
+@keyframes backgroundPulse {
+  0% {
+    filter: brightness(1);
+  }
+  100% {
+    filter: brightness(1.1);
+  }
+}
+
+.inicio-container h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  background: linear-gradient(to right, #ff6b6b, #feca57, #48dbfb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+  animation: titleGlow 3s infinite alternate, titleSlide 2s ease-in-out;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes titleGlow {
+  0% {
+    text-shadow: 0 0 5px rgba(255, 107, 107, 0.5);
+  }
+  100% {
+    text-shadow: 0 0 20px rgba(255, 107, 107, 1), 0 0 30px rgba(255, 107, 107, 0.8);
+  }
+}
+
+@keyframes titleSlide {
+  0% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.inicio-container p {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin-bottom: 40px;
+  animation: textGlow 2s infinite alternate;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes textGlow {
+  0% {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  }
+  100% {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 1);
+  }
+}
+
+.inicio-container button {
+  padding: 15px 30px;
+  margin: 10px;
+  background: linear-gradient(135deg, #ff9ff3, #f368e0);
+  border: none;
+  border-radius: 50px;
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  animation: buttonGlow 2s infinite alternate;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes buttonGlow {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 159, 243, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(255, 159, 243, 1);
+  }
+}
+
+.inicio-container button:hover {
+  background: linear-gradient(135deg, #f368e0, #ff9ff3);
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos para el componente Testimonials */
+.testimonials-container {
+  margin-top: 50px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

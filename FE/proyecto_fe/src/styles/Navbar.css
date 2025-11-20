@@ -1,0 +1,103 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f0f4f7; 
+  font-family: 'Inter', sans-serif;
+}
+
+
+.navbar {
+  background-color: #1a1f24; 
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  padding: 0 32px; 
+  min-height: 64px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+.logo-text { 
+  
+    color: #ffffff; 
+    font-size: 1.25em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar li {
+ 
+  margin-left: 24px; 
+}
+
+.navbar li:first-child {
+  margin-left: 0; 
+}
+
+
+.navbar li a {
+  display: block;
+  
+  color: #c3c4c7; 
+  
+
+  font-size: 1em;
+  font-weight: 400;
+  
+  text-align: center;
+ 
+  padding: 18px 0; 
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.navbar li a:hover {
+  
+  color: #ffffff;
+
+  background-color: transparent; 
+}
+
+
+
+.login-btn { 
+ 
+  
+  background-color: #209d9f;
+
+  color: #ffffff; 
+
+  font-weight: 500;
+  
+  border: none;
+  cursor: pointer;
+  
+
+  padding: 8px 24px; 
+ 
+  border-radius: 4px;
+  
+  transition: background-color 0.2s ease-in-out;
+ 
+  text-decoration: none;
+ 
+  display: inline-flex;
+  align-items: center;
+}
+
+
+.login-btn:hover {
+ 
+  background-color: #1a7d7e; 
+}

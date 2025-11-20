@@ -1,0 +1,21 @@
+.login-navbar {
+    background-color: #333;
+    padding: 1rem;
+}
+
+.login-navbar ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.login-navbar li a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+}
+
+.login-navbar li a:hover {
+    background-color: #111;
+}
