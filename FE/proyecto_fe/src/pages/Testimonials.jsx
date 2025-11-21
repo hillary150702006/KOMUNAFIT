@@ -7,22 +7,28 @@ import '../styles/Testimonials.css';
 const testimonials = [
   {
     id: 1,
-    name: "Ana Lucía",
-    text: "Me encanta la experiencia, el gimnasio es muy accesible , los entrenadores son super profesionales!",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop"
+    name: 'Ana Lucía',
+    text: 'Me encanta la experiencia, el gimnasio es muy accesible, los entrenadores son super profesionales!',
+    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop',
   },
   {
     id: 2,
-    name: "Roberto Méndez",
-    text: "Una experiencia fluida y sin complicaciones. El equipo de Komuna demostró un gran conocimiento técnico y obtuve increíbles resultados en 3 meses.",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop"
+    name: 'Roberto Méndez',
+    text: 'Una experiencia fluida y sin complicaciones. El equipo de Komuna demostró un gran conocimiento técnico y obtuve increíbles resultados en 3 meses.',
+    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop',
   },
   {
     id: 3,
-    name: "María Garcia",
-    text: "Creo que Komuna es el mejor gimasio al que he asistido , soy nueva por acá y me encantaría compartirles mi experiencia con ustedes.",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop"
-  }
+    name: 'Luisa Rodríguez',
+    text: 'He estado en Komuna durante 6 meses y no puedo creer lo bien que he mejorado. El personal es super amable y siempre dispuesto a ayudar.',
+    image: 'https://plus.unsplash.com/premium_photo-1705018501151-4045c97658a3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fG11amVyfGVufDB8fDB8fHww',
+  },
+  {
+    id: 4,
+    name: 'Pablo Garmendia',
+    text: 'Llevo 3 años desde que empecé mi cambio físico con Komuna y ha sido la mejor decisión que he tomado.',
+    image: 'https://i.pinimg.com/736x/e1/1b/78/e11b78d7cbd29115180659028a64ecf3.jpg',
+  },
 ];
 
 const Testimonials = () => {

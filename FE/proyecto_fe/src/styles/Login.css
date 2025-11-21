@@ -1,21 +1,146 @@
-.login-navbar {
-    background-color: #333;
-    padding: 1rem;
+/* Importa la fuente sugerida */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Montserrat', 'Raleway', 'Poppins', sans-serif;
+  background: linear-gradient(to bottom right, #4A54E8, #E83E48);
 }
 
-.login-navbar ul {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
+/* Centrado absoluto del contenedor principal */
+.contenedor-principal {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.login-navbar li a {
-    color: white;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
+/* Tarjeta flotante */
+.contenedor-login {
+  background: #fff;
+  border-radius: 25px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+  max-width: 380px;
+  width: 100%;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.login-navbar li a:hover {
-    background-color: #111;
+/* Logo y título */
+.logo-komunafit h1 {
+  color: #6C63FF;
+  font-size: 28px;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 10px;
+  letter-spacing: normal;
+}
+
+.mensaje-bienvenida {
+  color: #6C63FF;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Formulario */
+.formulario-login {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.formulario-login label {
+  font-size: 14px;
+  color: #555555;
+  font-weight: 400;
+  margin-bottom: 5px;
+}
+
+.campo-texto {
+  background: #fff;
+  border: 1px solid #8C8C8C;
+  border-radius: 2px;
+  padding: 12px;
+  font-size: 14px;
+  color: #555555;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.campo-texto:focus {
+  border-color: #6C63FF;
+}
+
+.campo-texto::placeholder {
+  color: #A0A0A0;
+}
+
+/* Botón principal */
+.boton-iniciar {
+  background: #6C63FF;
+  color: #fff;
+  border: none;
+  border-radius: 2px;
+  height: 45px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  margin-top: 10px;
+  box-shadow: none;
+  transition: background 0.2s;
+}
+
+.boton-iniciar:hover {
+  background: #5A52D6;
+}
+
+/* Enlaces secundarios */
+.enlace-olvido {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  color: #777777;
+  margin-top: 10px;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.enlace-olvido:hover {
+  text-decoration: underline;
+  color: #6C63FF;
+}
+
+/* Opcional: iconos internos en inputs */
+.campo-texto-icono {
+  position: relative;
+}
+
+.campo-texto-icono input {
+  padding-left: 36px;
+}
+
+.campo-texto-icono .icono {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6C63FF;
+  font-size: 18px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .contenedor-login {
+    padding: 30px 10px;
+    max-width: 95vw;
+  }
 }

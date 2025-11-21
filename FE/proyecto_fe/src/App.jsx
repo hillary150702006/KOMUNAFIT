@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Inicio from './pages/Inicio';
 import Perfil from './components/Perfil';
@@ -6,13 +6,10 @@ import Comunidad from './components/Comunidad';
 import Registro from './pages/Registro';
 import LoginPage from './pages/Login';
 
-const AppContent = () => {
-  const location = useLocation();
-  const showNavbar = location.pathname !== '/login';
-
+function App() {
   return (
-    <>
-      {showNavbar && <Navbar />}
+    <Router>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Inicio />} />
         <Route path="/login" element={<LoginPage />} />
@@ -20,14 +17,6 @@ const AppContent = () => {
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/comunidad" element={<Comunidad />} />
       </Routes>
-    </>
-  );
-};
-
-function App() {
-  return (
-    <Router>
-      <AppContent />
     </Router>
   );
 }
