@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Usuario, Perfil, Objetivo, Comunidad, Progreso, Miembro, Entrenador
+from .models import Usuario, Perfil, Objetivo, Comunidad, Progreso, Miembro, Entrenador,ComentarioComunidad
 from .serializers import (
     UsuarioSerializer,
     PerfilSerializer,
@@ -7,6 +7,7 @@ from .serializers import (
     ComunidadSerializer,
     ProgresoSerializer,
     MiembroSerializer,
+    ComentarioComunidadSerializer,
     EntrenadorSerializer,
 )
 from rest_framework.response import Response
@@ -17,6 +18,10 @@ from rest_framework.generics import ListCreateAPIView
 class UsuarioCreateView(ListCreateAPIView):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
+
+class ComentarioComunidadCreateView(ListCreateAPIView):
+    queryset = ComentarioComunidad.objects.all()
+    serializer_class = ComentarioComunidadSerializer
 
 class PerfilSerializerView(ListCreateAPIView):
     queryset = Perfil.objects.all()
@@ -38,11 +43,9 @@ class MiembroSerializerView(ListCreateAPIView):
     queryset = Miembro.objects.all()
     serializer_class = MiembroSerializer 
 
-class RetosSerializerView(ListCreateAPIView):
-    # No hay modelo 'Retos' definido en models.py; exponer Entrenador o eliminar esta vista.
+class EntrenadorSerializerView(ListCreateAPIView):
     queryset = Entrenador.objects.all()
-    serializer_class = EntrenadorSerializer
-
+    serializer_class = EntrenadorSerializer 
 
 class UsuarioLoginView(APIView):
     def post(self,request):
@@ -68,6 +71,15 @@ class UsuarioPorId(ListCreateAPIView):
         id = self.kwargs["id"]
         return Usuario.objects.filter(id=id)
 
+from .serializers import RetoSerializer,ClaseSerializer
+from .models import Clases,Retos
 
+class RetoView(ListCreateAPIView):
+    queryset = Retos.objects.all()
+    serializer_class = RetoSerializer
+
+class ClaseView(ListCreateAPIView):
+    queryset = Clases.objects.all()
+    serializer_class = ClaseSerializer
 
 

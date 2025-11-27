@@ -1,13 +1,16 @@
 import '../styles/Inicio.css';
-import Testimonials from './Testimonials';
+import TestimonialCard from './Testimonials';
+
 
 const Inicio = () => {
   return (
+    
     <div className="inicio-container">
       <h1>Bienvenido a KomunaFit</h1>
-      <p>Tu comunidad para una vida más saludable.</p>
-      <Testimonials />
+      <p>Únete a nuestra comunidad y comparte tu progreso!.</p>
+      <TestimonialCard/>
     </div>
+    
   );
 };
 

@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import '../styles/comunidad.css';
+import { GetData } from '../services/fetch';
 
 const Comunidad = () => {
-  const [usuarios] = useState([
-    { id: 1, nombre: 'Ana' },
-    { id: 2, nombre: 'Luis' },
-    { id: 3, nombre: 'Carlos' },
-  ]);
+  const [usuarios,setUsuarios] = useState([])
 
   const [progresos, setProgresos] = useState({});
+
+
+  useEffect(()=>{
+     async function traerUsuarios() {
+       const peticion = await GetData('api/api/usuario/')
+       setUsuarios(peticion)
+     }
+     traerUsuarios()
+  },[])
 
   const manejarCambio = (id, campo, valor) => {
     setProgresos((prev) => ({
@@ -40,29 +47,12 @@ const Comunidad = () => {
 
       {usuarios.map((usuario) => (
         <div key={usuario.id} className="tarjeta-usuario">
-          <h3>{usuario.nombre}</h3>
-
-          <input
-            type="number"
-            placeholder="Distancia (km)"
-            onChange={(e) => manejarCambio(usuario.id, 'distancia', e.target.value)}
-          />
-
-          <input
-            type="number"
-            placeholder="Tiempo (min)"
-            onChange={(e) => manejarCambio(usuario.id, 'tiempo', e.target.value)}
-          />
-
-          <input
-            type="text"
-            placeholder="Tipo de ejercicio"
-            onChange={(e) => manejarCambio(usuario.id, 'tipo', e.target.value)}
-          />
-
-          <button onClick={() => compartirProgreso(usuario.id)}>
-            Compartir progreso
+          <h3>{usuario.username}</h3>
+            <input type="text" />
+               <button onClick={() => enviarcomentario(usuario.id)}>
+            enviar comentario
           </button>
+          
         </div>
       ))}
     </div>

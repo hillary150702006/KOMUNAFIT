@@ -1,25 +1,78 @@
-import React from "react";
-import { Link } from 'react-router-dom';
-import "../styles/Navbar.css";
+import React, { useState } from "react";
+import '../styles/Navbar.css';
 
-const Navbar = () => {
+
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
+
   return (
-    <nav className="navbar">
-      <div className="navbar-logo">
-        <Link to="/">KomunaFit</Link>
-      </div>
-      <ul className="navbar-links">
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/entrenadores">Entrenadores</Link></li>
-        <li><Link to="/retos">Retos</Link></li>
-        <li><Link to="/clases">Clases</Link></li>
-        <li><Link to="/perfil">Perfil</Link></li>
-        <li><Link to="/comunidad">Comunidad</Link></li>
-      </ul>
-      <Link to="/login" className="login-btn">Iniciar Sesión</Link>
-      <Link to="/registro" className="register-btn">Registrarse</Link>
-    </nav>
-  );
-};
+    <>
+      <nav className="midnight-navbar">
+        {/* Logo */}
+        <div className="navbar-logo">
+          <h1>
+            KomunaFit
+          </h1>
+        </div>
 
-export default Navbar;
+
+        {/* Menú Desktop */}
+        <div className="navbar-center">
+          <div className="navbar-search">
+            <input type="text" placeholder="Buscar entrenadores, retos, clases" />
+          </div>
+
+
+          <ul className="navbar-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/entrenadores">Entrenadores</a></li>
+            <li><a href="/retos">Retos</a></li>
+            <li><a href="/clases">Clases</a></li>
+            <li><a href="/comunidad">Comunidad</a></li>
+          </ul>
+        </div>
+
+
+        {/* Acciones derecha */}
+        <div className="navbar-actions">
+          <a href="/login" className="btn-ghost">Iniciar sesión</a>
+          <a href="/registro" className="btn-primary">Registrarse</a>
+        </div>
+
+
+        {/* Hamburguesa móvil */}
+        <button
+          className="hamburger"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle menu"
+        >
+          {isOpen ? 'X' : 'Menú'}
+        </button>
+      </nav>
+
+
+      {/* Menú móvil fullscreen */}
+      {isOpen && (
+        <div className="mobile-overlay">
+          <div className="mobile-menu">
+            <div className="mobile-search-mobile">
+              <input type="text" placeholder="Buscar..." />
+            </div>
+            <ul className="mobile-links">
+              <li><a href="/" onClick={() => setIsOpen(false)}>Home</a></li>
+              <li><a href="/entrenadores" onClick={() => setIsOpen(false)}>Entrenadores</a></li>
+              <li><a href="/retos" onClick={() => setIsOpen(false)}>Retos</a></li>
+              <li><a href="/clases" onClick={() => setIsOpen(false)}>Clases</a></li>
+              <li><a href="/comunidad" onClick={() => setIsOpen(false)}>Comunidad</a></li>
+            </ul>
+            <div className="mobile-actions">
+              <a href="/login" className="btn-ghost-mobile">Iniciar sesión</a>
+              <a href="/registro" className="btn-primary-mobile">Registrarse</a>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}

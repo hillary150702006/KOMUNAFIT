@@ -29,6 +29,10 @@ class Comunidad(models.Model):
     descripcion = models.CharField(max_length=50)
     fecha_creacion = models.DateField(auto_now_add=True)
 
+class ComentarioComunidad(models.Model):
+    usuario =models.ForeignKey(Usuario,on_delete=models.CASCADE,related_name='usuario_comunidad')
+    usuario_comentario =models.ForeignKey(Usuario,on_delete=models.CASCADE,related_name='usuario_comentario')
+    comentario = models.CharField(max_length=40)
 
 class Miembro(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
@@ -51,4 +55,17 @@ class Entrenador(models.Model):
     disponibilidad = models.CharField(max_length=100)
     fecha_registro = models.DateField(auto_now_add=True)
 
-    
+
+
+class Retos(models.Model):
+    nombre_reto = models.CharField(max_length=50)
+    dificultad_reto = models.CharField(max_length=50)
+
+
+class Clases(models.Model):
+    nombre_clase = models.CharField(max_length=50)
+    descripcion_clase = models.TextField(blank=True)
+    entrenador = models.ForeignKey(Entrenador, on_delete=models.CASCADE)
+    fecha_clase = models.DateField()
+    hora_clase = models.TimeField()
+    duracion_clase = models.FloatField()

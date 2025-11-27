@@ -1,14 +1,17 @@
-/* Importa la fuente sugerida */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+
 
 body {
   min-height: 100vh;
   margin: 0;
   font-family: 'Montserrat', 'Raleway', 'Poppins', sans-serif;
   background: linear-gradient(to bottom right, #4A54E8, #E83E48);
+  background-image: url("https://i.pinimg.com/736x/a0/40/54/a04054cb5d92f00526244e69339d903d.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  background-position: center;
 }
 
-/* Centrado absoluto del contenedor principal */
+
 .contenedor-principal {
   min-height: 100vh;
   display: flex;
@@ -16,7 +19,6 @@ body {
   justify-content: center;
 }
 
-/* Tarjeta flotante */
 .contenedor-login {
   background: #fff;
   border-radius: 25px;

@@ -1,24 +1,19 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Inicio from './pages/Inicio';
-import Perfil from './components/Perfil';
-import Comunidad from './components/Comunidad';
-import Registro from './pages/Registro';
-import LoginPage from './pages/Login';
+import React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom';
+import Routing from './routes/Routing'
+ import Navbar from './components/Navbar'; 
+  import Footer from './components/Footer';
 
 function App() {
   return (
-    <Router>
+   <Router>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Inicio />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/registro" element={<Registro />} />
-        <Route path="/perfil" element={<Perfil />} />
-        <Route path="/comunidad" element={<Comunidad />} />
-      </Routes>
-    </Router>
-  );
+      <main>
+        <Routing />
+      </main>
+      <Footer />
+  </Router>
+  )
 }
 
-export default App;
+export default App

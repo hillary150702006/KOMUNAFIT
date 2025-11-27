@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import '../styles/Perfil.css';
 
 function Perfil() {
+   
   const [isEditing, setIsEditing] = useState(false);
   const [activeTab, setActiveTab] = useState('Información Personal');
+  const [mostrarEdicion,setMostrarEdicion] = useState(false)
   const [profileData, setProfileData] = useState({
     nombre: '',
     email: '',
@@ -15,14 +17,14 @@ function Perfil() {
   const [photoFile, setPhotoFile] = useState(null);
   const [photoPreview, setPhotoPreview] = useState('/ruta/a/foto.jpg');
   const [objetivos, setObjetivos] = useState([
-    'Perder 5 kg en 3 meses',
-    'Ganar masa muscular en brazos y piernas',
-    'Mejorar resistencia cardiovascular'
+    'Bajar 11 kilos en 4 meses',
+    'Hacer la dieta carnivora ',
+    'Dormir 8hras diarias y levantarme temprano'
   ]);
   const [preferencias, setPreferencias] = useState([
-    'Entrenamientos de fuerza 3 veces por semana',
-    'Cardio: Caminatas diarias de 30 minutos',
-    'Dieta: Alta en proteínas, baja en carbohidratos'
+    'Usar la caminadora en casa ',
+    'Ir al gimnasio 3 veces por semana y alternar en casa',
+    'Usar más peso y lograr la recomposición corporal'
   ]);
   const [seguridad, setSeguridad] = useState({
     currentPassword: '',
@@ -30,11 +32,11 @@ function Perfil() {
     confirmPassword: ''
   });
   const [actividades, setActividades] = useState([
-    'Entrenamiento de fuerza - 15 Octubre 2023',
-    'Caminata de 5 km - 14 Octubre 2023',
-    'Yoga - 13 Octubre 2023',
-    'Entrenamiento de pesas - 12 Octubre 2023',
-    'Ciclismo - 11 Octubre 2023'
+    'Entrenamiento de fuerza 3 veces a la semana',
+    'Caminar unos 10.000 pasos diarios',
+    'Consumir proteína magra ',
+    'Levantarme temprano ir al gym y tomarme el preentreno',
+    'Romper el ayuno a medio dia con proteína y grasa saludable'
   ]);
   const [newObjetivo, setNewObjetivo] = useState('');
   const [newPreferencia, setNewPreferencia] = useState('');
@@ -124,9 +126,9 @@ function Perfil() {
         </div>
 
         <div className="estadisticas-usuario">
-          <div className="dato"><strong>28</strong><span>Amigos</span></div>
-          <div className="dato"><strong>54</strong><span>Asistencias</span></div>
-          <div className="dato"><strong>12</strong><span>Completadas</span></div>
+          <div className="dato"><span>Amigos</span></div>
+          <div className="dato"><span>Asistencias</span></div>
+          <div className="dato"><span>Completadas</span></div>
         </div>
 
         <nav className="navegacion-perfil">
@@ -155,8 +157,10 @@ function Perfil() {
             Actividad Reciente
           </button>
         </nav>
-
-        {activeTab === 'Información Personal' && (
+          <button onClick={()=>setMostrarEdicion(!mostrarEdicion)}>Mostrar edicion</button>
+          {mostrarEdicion == true && (
+             <>
+             {activeTab === 'Información Personal' && (
           <form className="formulario-informacion" onSubmit={handleSubmit}>
             <label>Nombre Completo</label>
             <input
@@ -223,6 +227,9 @@ function Perfil() {
             </div>
           </form>
         )}
+             </>
+          )}
+        
 
         {activeTab === 'Objetivos y Preferencias' && (
           <div className="contenido-tab">

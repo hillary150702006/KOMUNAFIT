@@ -7,7 +7,9 @@ from .models import (
     Progreso,
     Miembro,
     Entrenador,
+    ComentarioComunidad
 )
+from .models import Retos,Clases
 
 
 class UsuarioSerializer(ModelSerializer):
@@ -27,6 +29,11 @@ class PerfilSerializer(ModelSerializer):
     class Meta:
         model = Perfil
         fields = ["usuario", "peso", "altura"]
+
+class ComentarioComunidadSerializer(ModelSerializer):
+    class Meta:
+        model = ComentarioComunidad
+        fields = '__all__'
 
 
 class ObjetivoSerializer(ModelSerializer):
@@ -54,8 +61,18 @@ class MiembroSerializer(ModelSerializer):
 
 
 class EntrenadorSerializer(ModelSerializer):
+    usuario = UsuarioSerializer(read_only=True)
     class Meta:
         model = Entrenador
-        fields = ["usuario", "especialidad", "experiencia", "disponibilidad", "fecha_registro"]
+        fields = ["id", "usuario", "especialidad", "experiencia", "disponibilidad", "fecha_registro"]
 
 
+class RetoSerializer(ModelSerializer):
+    class Meta:
+        model = Retos
+        fields = "__all__"
+
+class ClaseSerializer(ModelSerializer):
+    class Meta:
+        model = Clases
+        fields = "__all__"

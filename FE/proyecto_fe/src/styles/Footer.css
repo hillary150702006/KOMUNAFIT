@@ -1,0 +1,143 @@
+:root {
+  --primary-gold: #b8860b; /* Oro metálico profundo para lujo supremo */
+  --primary-gold-light: #ffd700; /* Oro brillante para highlights */
+  --bg-dark: #0a0a0a; /* Negro absoluto para misterio */
+  --bg-ultra-dark: #000000; /* Negro puro */
+  --text-light: #ffffff; /* Blanco puro */
+  --text-silver: #c0c0c0; /* Plata sutil */
+  --text-charcoal: #4a4a4a; /* Gris carbón para contraste */
+}
+
+.footer-section {
+  background: 
+    radial-gradient(ellipse at top, rgba(184, 134, 11, 0.03) 0%, transparent 80%),
+    linear-gradient(135deg, var(--bg-ultra-dark) 0%, var(--bg-dark) 100%); /* Gradiente más sutil para modernidad */
+  color: var(--text-light);
+  padding: 3rem 1rem 2rem; /* Padding más compacto y moderno */
+  font-family: 'Inter', system-ui, sans-serif;
+  border-top: 1px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+}
+
+.footer-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--primary-gold-light), transparent); /* Línea más brillante */
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+.footer-container {
+  max-width: 1100px; /* Ancho más ajustado para minimalismo moderno */
+  margin: 0 auto;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2.5rem; /* Espacio equilibrado */
+  margin-bottom: 2.5rem;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.footer-logo {
+  font-size: 1.6rem; /* Tamaño más elegante */
+  font-weight: 700;
+  background: linear-gradient(45deg, var(--primary-gold), var(--primary-gold-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.3px;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.footer-logo::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 40px;
+  height: 1px;
+  background: var(--primary-gold-light);
+  border-radius: 1px;
+}
+
+.footer-desc {
+  color: var(--text-silver);
+  line-height: 1.5;
+  font-size: 0.9rem;
+  font-style: normal; /* Removido italic para look más clean y moderno */
+  letter-spacing: 0.2px;
+}
+
+.footer-heading {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  color: var(--text-light);
+  position: relative;
+  padding-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 1px; /* Espaciado para modernidad */
+}
+
+.footer-heading::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(to right, var(--primary-gold-light), var(--primary-gold));
+  transition: width 0.3s ease;
+}
+
+.footer-heading:hover::after {
+  width: 50px;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.6rem;
+}
+
+.footer-links a {
+  color: var(--text-silver);
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  font-size: 0.9rem;
+}
+
+.footer-links a::before {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--primary-gold-light);
+  transition: width 0.3s ease;
+}
