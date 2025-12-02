@@ -30,7 +30,7 @@
   background-clip: text;
 }
 
-/* Centro */
+
 .navbar-center {
   display: flex;
   align-items: center;
@@ -93,7 +93,7 @@
   opacity: 0.8;
 }
 
-/* Derecha */
+
 .navbar-actions {
   display: flex;
   align-items: center;
@@ -111,9 +111,11 @@
   text-decoration: none;
   font-weight: 500;
   transition: background-color 0.3s, color 0.3s;
-  padding: 10px 24px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 3px 28px;
+  border: 1px solid rgba(60, 16, 162, 0.2);
   border-radius: 9999px;
+  width: 97px;
+  text-align: center;
 }
 
 .btn-ghost:hover {
@@ -147,7 +149,7 @@
   font-weight: 600;
 }
 
-/* Móvil */
+
 @media (max-width: 1024px) {
   .navbar-center {
     display: none;

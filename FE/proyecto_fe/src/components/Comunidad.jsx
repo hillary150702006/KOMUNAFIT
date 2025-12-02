@@ -6,6 +6,8 @@ const Comunidad = () => {
   const [usuarios,setUsuarios] = useState([])
 
   const [progresos, setProgresos] = useState({});
+  const [comentarios, setComentarios] = useState({});
+  const [likes, setLikes] = useState({});
 
 
   useEffect(()=>{
@@ -37,6 +39,33 @@ const Comunidad = () => {
     }
   };
 
+  const manejarComentario = (id, valor) => {
+    setComentarios((prev) => ({
+      ...prev,
+      [id]: valor,
+    }));
+  };
+
+  const enviarComentario = (id) => {
+    const comentario = comentarios[id];
+    if (comentario && comentario.trim()) {
+      alert('Comentario enviado');
+      setComentarios((prev) => ({
+        ...prev,
+        [id]: '',
+      }));
+    } else {
+      alert('Escribe un comentario antes de enviar');
+    }
+  };
+
+  const manejarLike = (id) => {
+    setLikes((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
+
   return (
     <div className="comunidad">
       <h1>Nuestra Comunidad</h1>
@@ -48,11 +77,23 @@ const Comunidad = () => {
       {usuarios.map((usuario) => (
         <div key={usuario.id} className="tarjeta-usuario">
           <h3>{usuario.username}</h3>
-            <input type="text" />
-               <button onClick={() => enviarcomentario(usuario.id)}>
-            enviar comentario
-          </button>
-          
+          <input
+            type="text"
+            value={comentarios[usuario.id] || ''}
+            onChange={(e) => manejarComentario(usuario.id, e.target.value)}
+            placeholder="Escribe un comentario..."
+          />
+          <div className="acciones-usuario">
+            <button onClick={() => enviarComentario(usuario.id)}>
+              Enviar comentario
+            </button>
+            <button
+              className={`like-btn ${likes[usuario.id] ? 'liked' : ''}`}
+              onClick={() => manejarLike(usuario.id)}
+            >
+              {likes[usuario.id] ? '❤️ Liked' : '🤍 Like'}
+            </button>
+          </div>
         </div>
       ))}
     </div>

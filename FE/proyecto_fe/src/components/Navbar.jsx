@@ -9,7 +9,7 @@ export default function Navbar() {
   return (
     <>
       <nav className="midnight-navbar">
-        {/* Logo */}
+
         <div className="navbar-logo">
           <h1>
             KomunaFit
@@ -17,7 +17,7 @@ export default function Navbar() {
         </div>
 
 
-        {/* Menú Desktop */}
+
         <div className="navbar-center">
           <div className="navbar-search">
             <input type="text" placeholder="Buscar entrenadores, retos, clases" />
@@ -34,14 +34,14 @@ export default function Navbar() {
         </div>
 
 
-        {/* Acciones derecha */}
+
         <div className="navbar-actions">
-          <a href="/login" className="btn-ghost">Iniciar sesión</a>
-          <a href="/registro" className="btn-primary">Registrarse</a>
+          <a href="/login" className="btn-ghost btn-login">Iniciar sesión</a>
+          <a href="/registro" className="btn-ghost btn-registration">Registrarse</a>
         </div>
 
 
-        {/* Hamburguesa móvil */}
+
         <button
           className="hamburger"
           onClick={() => setIsOpen(!isOpen)}
@@ -52,7 +52,7 @@ export default function Navbar() {
       </nav>
 
 
-      {/* Menú móvil fullscreen */}
+
       {isOpen && (
         <div className="mobile-overlay">
           <div className="mobile-menu">
@@ -68,7 +68,7 @@ export default function Navbar() {
             </ul>
             <div className="mobile-actions">
               <a href="/login" className="btn-ghost-mobile">Iniciar sesión</a>
-              <a href="/registro" className="btn-primary-mobile">Registrarse</a>
+              <a href="/registro" className="btn-ghost-mobile">Registrarse</a>
             </div>
           </div>
         </div>

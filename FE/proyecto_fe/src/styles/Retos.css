@@ -1,0 +1,230 @@
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background: url('../assets/retos.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+.retos-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.retos-title {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 50px;
+  color: #ffd700; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: 2px;
+}
+
+.retos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.reto-card {
+  background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+  border-radius: 12px;
+  padding: 25px 20px 20px 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #333;
+  position: relative;
+  width: 450px;
+  height: 150px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.reto-card::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 20px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #f0f0f0;
+}
+
+
+
+
+
+.reto-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.reto-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.user-avatar {
+
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #3498db, #2ecc71);
+  margin-right: 15px;
+  flex-shrink: 0;
+  border: 2px solid #ecf0f1;
+}
+.user-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.reto-name {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-top: 15px;
+  color: #ffffff;
+}
+
+.reto-difficulty {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.reto-difficulty.facil {
+  color: #27ae60;
+  background: rgba(39, 174, 96, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+.reto-difficulty.medio {
+  color: #f39c12;
+  background: rgba(243, 156, 18, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+.reto-difficulty.dificil {
+  color: #e74c3c;
+  background: rgba(231, 76, 60, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+.reaction-buttons {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  gap: 5px;
+}
+
+.reaction-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #555;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.reaction-btn:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.reaction-btn.active {
+  background: #ff6b6b;
+  color: white;
+  border-color: #ff6b6b;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.like-btn, .comment-btn {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.like-btn:hover, .comment-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.02);
+}
+
+.like-btn.liked {
+  background: #ff6b6b;
+  color: white;
+  border-color: #ff6b6b;
+}
+
+.reaction-buttons {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.no-retos {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #cccccc;
+  margin-top: 50px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .retos-title {
+    font-size: 2.5rem;
+  }
+
+  .reto-card {
+    padding: 20px;
+  }
+
+  .retos-grid {
+    grid-template-columns: 1fr;
+  }
+}

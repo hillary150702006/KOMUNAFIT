@@ -48,15 +48,6 @@ class Progreso(models.Model):
     tipo_ejercicio = models.CharField(max_length=50)
 
 
-class Entrenador(models.Model):
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    especialidad = models.CharField(max_length=100)
-    experiencia = models.TextField(blank=True)
-    disponibilidad = models.CharField(max_length=100)
-    fecha_registro = models.DateField(auto_now_add=True)
-
-
-
 class Retos(models.Model):
     nombre_reto = models.CharField(max_length=50)
     dificultad_reto = models.CharField(max_length=50)
@@ -65,7 +56,7 @@ class Retos(models.Model):
 class Clases(models.Model):
     nombre_clase = models.CharField(max_length=50)
     descripcion_clase = models.TextField(blank=True)
-    entrenador = models.ForeignKey(Entrenador, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     fecha_clase = models.DateField()
     hora_clase = models.TimeField()
     duracion_clase = models.FloatField()

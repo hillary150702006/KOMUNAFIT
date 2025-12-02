@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Usuario, Perfil, Objetivo, Comunidad, Progreso, Miembro, Entrenador,ComentarioComunidad
+from .models import Usuario, Perfil, Objetivo, Comunidad, Progreso, Miembro, ComentarioComunidad
 from .serializers import (
     UsuarioSerializer,
     PerfilSerializer,
@@ -8,7 +8,7 @@ from .serializers import (
     ProgresoSerializer,
     MiembroSerializer,
     ComentarioComunidadSerializer,
-    EntrenadorSerializer,
+ 
 )
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
@@ -42,10 +42,6 @@ class progresoSerializerView(ListCreateAPIView):
 class MiembroSerializerView(ListCreateAPIView):
     queryset = Miembro.objects.all()
     serializer_class = MiembroSerializer 
-
-class EntrenadorSerializerView(ListCreateAPIView):
-    queryset = Entrenador.objects.all()
-    serializer_class = EntrenadorSerializer 
 
 class UsuarioLoginView(APIView):
     def post(self,request):

@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/Perfil.css';
+import { useLocation } from "react-router-dom";
 
 function Perfil() {
-   
+   const location = useLocation();
+  const usuario = location.state;
   const [isEditing, setIsEditing] = useState(false);
   const [activeTab, setActiveTab] = useState('Información Personal');
   const [mostrarEdicion,setMostrarEdicion] = useState(false)
   const [profileData, setProfileData] = useState({
+
+
     nombre: '',
     email: '',
     altura: '',
@@ -14,6 +18,18 @@ function Perfil() {
     fechaNacimiento: '',
     genero: ''
   });
+
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      const userData = JSON.parse(user);
+      setProfileData(prev => ({
+        ...prev,
+        nombre: userData.username,
+        email: userData.email
+      }));
+    }
+  }, []);
   const [photoFile, setPhotoFile] = useState(null);
   const [photoPreview, setPhotoPreview] = useState('/ruta/a/foto.jpg');
   const [objetivos, setObjetivos] = useState([

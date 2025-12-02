@@ -6,7 +6,6 @@ from .models import (
     Comunidad,
     Progreso,
     Miembro,
-    Entrenador,
     ComentarioComunidad
 )
 from .models import Retos,Clases
@@ -58,14 +57,6 @@ class MiembroSerializer(ModelSerializer):
     class Meta:
         model = Miembro
         fields = ["usuario", "comunidad", "actividad", "rol"]
-
-
-class EntrenadorSerializer(ModelSerializer):
-    usuario = UsuarioSerializer(read_only=True)
-    class Meta:
-        model = Entrenador
-        fields = ["id", "usuario", "especialidad", "experiencia", "disponibilidad", "fecha_registro"]
-
 
 class RetoSerializer(ModelSerializer):
     class Meta:

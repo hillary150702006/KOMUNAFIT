@@ -1,148 +1,187 @@
 
-
-body {
-  min-height: 100vh;
-  margin: 0;
-  font-family: 'Montserrat', 'Raleway', 'Poppins', sans-serif;
-  background: linear-gradient(to bottom right, #4A54E8, #E83E48);
-  background-image: url("https://i.pinimg.com/736x/a0/40/54/a04054cb5d92f00526244e69339d903d.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-  background-position: center;
-}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,900;1,900&display=swap');
 
 
 .contenedor-principal {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+    background-color: #02094b8b;
 }
+
+.fondo-gimnasio {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+   
+    animation: gymBreath 30s infinite alternate;
+}
+
+@keyframes gymBreath {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.15); }
+}
+
 
 .contenedor-login {
-  background: #fff;
-  border-radius: 25px;
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
-  max-width: 380px;
-  width: 100%;
-  padding: 40px 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 400px;
+    padding: 3rem;
+    
+  
+    background: rgba(20, 20, 20, 0.85); 
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil */
+    box-shadow: 0 20px 50px rgba(0,0,0, 0.8); /* Sombra fuerte */
+    
+    color: #090909;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    
+    /* Animación de entrada agresiva pero elegante */
+    animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Logo y título */
+@keyframes slideUp {
+    0% { opacity: 0; transform: translateY(50px) scale(0.95); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* --- 4. LOGOTIPO Y TÍTULOS --- */
 .logo-komunafit h1 {
-  color: #6C63FF;
-  font-size: 28px;
-  font-weight: 300;
-  text-align: center;
-  margin-bottom: 10px;
-  letter-spacing: normal;
+    font-size: 2.8rem;
+    font-weight: 900;
+    font-style: italic; /* Estilo deportivo */
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0;
+    line-height: 1;
+    
+    /* Gradiente metálico/eléctrico */
+    background: linear-gradient(90deg, #fff, #a1a1aa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /* Pequeña sombra de texto brillante */
+    text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
 }
 
 .mensaje-bienvenida {
-  color: #6C63FF;
-  font-size: 20px;
-  font-weight: 400;
-  text-align: center;
-  margin-bottom: 20px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #a1a1aa; /* Gris metálico */
+    margin: 0;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
 }
 
-/* Formulario */
+/* --- 5. FORMULARIO --- */
 .formulario-login {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
 }
 
 .formulario-login label {
-  font-size: 14px;
-  color: #555555;
-  font-weight: 400;
-  margin-bottom: 5px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #00e0ff; /* Acento CIAN ELÉCTRICO para los labels */
+    margin-bottom: 5px;
+    display: block;
 }
 
 .campo-texto {
-  background: #fff;
-  border: 1px solid #8C8C8C;
-  border-radius: 2px;
-  padding: 12px;
-  font-size: 14px;
-  color: #555555;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.campo-texto:focus {
-  border-color: #6C63FF;
+    width: 100%;
+    padding: 14px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #2a2a2a; /* Fondo gris oscuro para inputs */
+    border: 2px solid transparent;
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .campo-texto::placeholder {
-  color: #A0A0A0;
+    color: #666;
 }
 
-/* Botón principal */
+.campo-texto:focus {
+    background-color: #333;
+    border-color: #00e0ff; /* Borde brillante al escribir */
+    box-shadow: 0 0 15px rgba(0, 224, 255, 0.2);
+}
+
+/* --- 6. BOTÓN DE ACCIÓN --- */
 .boton-iniciar {
-  background: #6C63FF;
-  color: #fff;
-  border: none;
-  border-radius: 2px;
-  height: 45px;
-  width: 100%;
-  font-size: 14px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  cursor: pointer;
-  margin-top: 10px;
-  box-shadow: none;
-  transition: background 0.2s;
+    margin-top: 1rem;
+    padding: 16px;
+    font-size: 1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    
+    /* Gradiente energético (Cian a Azul) */
+    background: linear-gradient(135deg, #00e0ff 0%, #0073ff 100%);
+    box-shadow: 0 4px 15px rgba(0, 224, 255, 0.4);
+    
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .boton-iniciar:hover {
-  background: #5A52D6;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(0, 224, 255, 0.6);
 }
 
-/* Enlaces secundarios */
+.boton-iniciar:active {
+    transform: translateY(-1px);
+}
+
+/* --- 7. ENLACES SECUNDARIOS --- */
 .enlace-olvido {
-  display: block;
-  text-align: center;
-  font-size: 12px;
-  color: #777777;
-  margin-top: 10px;
-  text-decoration: none;
-  font-weight: 400;
+    display: block;
+    text-align: center;
+    color: #888;
+    text-decoration: none;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    transition: color 0.3s;
 }
 
 .enlace-olvido:hover {
-  text-decoration: underline;
-  color: #6C63FF;
+    color: #fff;
 }
 
-/* Opcional: iconos internos en inputs */
-.campo-texto-icono {
-  position: relative;
-}
-
-.campo-texto-icono input {
-  padding-left: 36px;
-}
-
-.campo-texto-icono .icono {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #6C63FF;
-  font-size: 18px;
-}
-
-/* Responsive */
-@media (max-width: 480px) {
-  .contenedor-login {
-    padding: 30px 10px;
-    max-width: 95vw;
-  }
+/* El enlace de crear cuenta lo hacemos resaltar un poco más */
+a[href="/registro"] {
+    color: #fff;
+    font-weight: 600;
+    border-bottom: 1px solid #00e0ff;
+    width: fit-content;
+    margin: 10px auto 0;
+    padding-bottom: 2px;
 }

@@ -17,8 +17,9 @@ const Login = () => {
 
         const peticion = await postData('api/login/', DatosUsuario);
         if (peticion.mensaje === "usuario valido") {
-            navigate("/perfil");
+            localStorage.setItem("user", JSON.stringify(peticion.user));
             localStorage.setItem("id", peticion.id);
+            navigate("/perfil");
         } else {
             alert("acceso incorrecto");
         }
