@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Perfil.css';
+import { GetData } from '../services/fetch';
 import { useLocation } from "react-router-dom";
 
 function Perfil() {
-   const location = useLocation();
-  const usuario = location.state;
   const [isEditing, setIsEditing] = useState(false);
   const [activeTab, setActiveTab] = useState('Información Personal');
-  const [mostrarEdicion,setMostrarEdicion] = useState(false)
+  const [mostrarEdicion, setMostrarEdicion] = useState(false);
   const [profileData, setProfileData] = useState({
-
-
     nombre: '',
     email: '',
     altura: '',
@@ -19,17 +16,37 @@ function Perfil() {
     genero: ''
   });
 
+
   useEffect(() => {
-    const user = localStorage.getItem('user');
-    if (user) {
-      const userData = JSON.parse(user);
-      setProfileData(prev => ({
-        ...prev,
-        nombre: userData.username,
-        email: userData.email
-      }));
+    async function fetchUserData() {
+     
+      const userId = localStorage.getItem('id');
+
+      if (userId) {
+        try {
+      
+          const userData = await GetData(`api/usuario/${userId}/`);
+          
+       
+          if (userData) {
+            setProfileData({
+              nombre: userData.username || '',
+              email: userData.email || '',
+              altura: userData.altura || '',
+              peso: userData.peso || '',
+              fechaNacimiento: userData.fecha_nacimiento || '',
+              genero: userData.genero || ''
+            });
+          }
+        } catch (error) {
+          console.error("Error al obtener los datos del perfil:", error);
+        }
+      }
     }
+
+    fetchUserData();
   }, []);
+
   const [photoFile, setPhotoFile] = useState(null);
   const [photoPreview, setPhotoPreview] = useState('/ruta/a/foto.jpg');
   const [objetivos, setObjetivos] = useState([

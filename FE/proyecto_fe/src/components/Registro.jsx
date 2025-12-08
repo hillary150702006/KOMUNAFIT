@@ -29,13 +29,12 @@ const Registro = () => {
         }
 
         try {
-            const peticion = await postData('api/api/usuario/',objUsuario)
-            if (peticion && peticion.id) {
-                alert('Registro exitoso, bienvenido');
-                localStorage.setItem('id', peticion.id);
-                localStorage.setItem('user', JSON.stringify({ username: nombreUsuario, email: correoUsuario }));
-                navigate('/perfil');
-            }
+            const peticion = await postData('api/usuario/', objUsuario); 
+        if (peticion && peticion.id) {
+            alert('Registrado correctamente');
+            
+            navigate('/perfil');
+        } else {
                 const errorMessage = peticion.detail || "Error en el registro. Inténtalo de nuevo.";
                 setError(errorMessage);
             }
@@ -68,7 +67,7 @@ const Registro = () => {
 
                     {error && <p className="mensaje-error">{error}</p>}
 
-                    <button onClick={() => {guardarUsuario(); setRegistroExitoso(true);}}className="boton-registrar">Registrarse</button>
+                    <button type="submit" className="boton-registrar">Registrarse</button>
                 </form>
             )}
             {!registroExitoso && (
@@ -78,6 +77,6 @@ const Registro = () => {
             )}
         </div>
     )
-
+} 
 
 export default Registro;

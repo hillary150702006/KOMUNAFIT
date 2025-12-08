@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,900;1,900&display=swap');
+
 
 
 .contenedor-principal {
@@ -11,7 +11,10 @@
     align-items: center;
     font-family: 'Montserrat', sans-serif;
     overflow: hidden;
-    background-color: #02094b8b;
+     background-image: url('../assets/komufit.png');
+   background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .fondo-gimnasio {
@@ -46,15 +49,15 @@
     -webkit-backdrop-filter: blur(15px);
     
     border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil */
-    box-shadow: 0 20px 50px rgba(0,0,0, 0.8); /* Sombra fuerte */
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    box-shadow: 0 20px 50px rgba(0,0,0, 0.8); 
     
     color: #090909;
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
     
-    /* Animación de entrada agresiva pero elegante */
+    
     animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
@@ -63,22 +66,22 @@
     100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* --- 4. LOGOTIPO Y TÍTULOS --- */
+
 .logo-komunafit h1 {
     font-size: 2.8rem;
     font-weight: 900;
-    font-style: italic; /* Estilo deportivo */
+    font-style: italic;
     text-transform: uppercase;
     text-align: center;
     margin: 0;
     line-height: 1;
     
-    /* Gradiente metálico/eléctrico */
+  
     background: linear-gradient(90deg, #fff, #a1a1aa);
-    -webkit-background-clip: text;
+    
     -webkit-text-fill-color: transparent;
     
-    /* Pequeña sombra de texto brillante */
+  
     text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
 }
 
@@ -86,13 +89,12 @@
     text-align: center;
     font-size: 0.9rem;
     font-weight: 400;
-    color: #a1a1aa; /* Gris metálico */
+    color: #a1a1aa; 
     margin: 0;
     margin-bottom: 1rem;
     letter-spacing: 0.5px;
 }
 
-/* --- 5. FORMULARIO --- */
 .formulario-login {
     display: flex;
     flex-direction: column;
@@ -104,7 +106,7 @@
     text-transform: uppercase;
     font-weight: 700;
     letter-spacing: 1px;
-    color: #00e0ff; /* Acento CIAN ELÉCTRICO para los labels */
+    color: #00e0ff; 
     margin-bottom: 5px;
     display: block;
 }
@@ -114,7 +116,7 @@
     padding: 14px;
     font-size: 1rem;
     color: #fff;
-    background-color: #2a2a2a; /* Fondo gris oscuro para inputs */
+    background-color: #2a2a2a;
     border: 2px solid transparent;
     border-radius: 8px;
     outline: none;

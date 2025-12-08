@@ -16,9 +16,10 @@ const Login = () => {
         };
 
         const peticion = await postData('api/login/', DatosUsuario);
+        console.log(peticion);
+        
         if (peticion.mensaje === "usuario valido") {
-            localStorage.setItem("user", JSON.stringify(peticion.user));
-            localStorage.setItem("id", peticion.id);
+            // No guardar datos en localStorage para respetar la privacidad
             navigate("/perfil");
         } else {
             alert("acceso incorrecto");

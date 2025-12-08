@@ -1,0 +1,165 @@
+
+
+/* Contenedor principal: Fondo oscuro general */
+.clases-container {
+    max-width: 100%; /* Ocupar ancho completo disponible */
+    margin: 0 auto;
+    padding: 40px 20px;
+    background: #121418; /* Mismo fondo oscuro que la comunidad */
+    min-height: 100vh;
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+    color: #e4e6eb;
+}
+
+/* Título de la sección */
+.clases-title {
+    text-align: left; /* Alineado a la izquierda como un dashboard */
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 30px;
+    margin-left: 10px;
+    text-transform: none; /* Quitamos mayúsculas forzadas */
+    letter-spacing: normal;
+    text-shadow: none;
+}
+
+/* Quitamos la línea decorativa antigua */
+.clases-title::after {
+    display: none;
+}
+
+/* Grid: Ahora configurado para parecer una lista de tarjetas */
+.clases-grid {
+    display: grid;
+    /* Columnas más anchas para parecer filas de una lista */
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); 
+    gap: 20px;
+    justify-items: stretch;
+}
+
+/* La Tarjeta de clase (Estilo horizontal oscuro) */
+.clase-card {
+    background: #1e2126; /* Gris oscuro para la tarjeta */
+    backdrop-filter: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    width: auto;
+    max-width: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #2f3338; /* Borde sutil */
+    
+    /* Disposición Flex para poner contenido al lado (si hay imagen) */
+    display: flex;
+    flex-direction: column; /* Mantenemos columna por si no tienes imagen HTML estructurada, pero alineamos a la izquierda */
+    align-items: flex-start; 
+}
+
+/* Quitamos la barra de colores superior antigua */
+.clase-card::before {
+    display: none;
+}
+
+/* Simulación de imagen a la izquierda (Visual placeholder) */
+/* Esto crea el cuadro gris/imagen a la izquierda como en tu referencia */
+.clase-card::after {
+
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 2rem;
+    opacity: 0.1;
+}
+
+.clase-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+    background: #25282e; /* Ligeramente más claro al pasar el mouse */
+}
+
+/* Nombre de la clase (Título) */
+.clase-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 5px;
+    text-align: left;
+    display: block;
+    width: 100%;
+}
+
+/* Quitamos el emoji saltarín antiguo */
+.clase-name::after {
+    display: none;
+}
+
+/* Descripción (Ubicación o detalles) */
+.clase-descripcion {
+    font-size: 0.95rem;
+    color: #b0b3b8; /* Gris claro */
+    line-height: 1.4;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* Horario (Estilizado simple y limpio) */
+.clase-horario {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #e4e6eb;
+    margin-bottom: 8px;
+    display: inline-flex;
+    align-items: center;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+}
+
+.clase-horario::before {
+    content: '🕒';
+    margin-right: 8px;
+    font-size: 1rem;
+    filter: grayscale(100%); /* Icono discreto */
+}
+
+/* Instructor (Estilizado como etiqueta o subtítulo) */
+.clase-instructor {
+    font-size: 0.9rem;
+    color: #29b6f6; /* Azul cyan para destacar al instructor */
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    background: rgba(41, 182, 246, 0.1); /* Fondo azul muy suave */
+    padding: 6px 12px;
+    border-radius: 20px; /* Estilo píldora */
+    margin-top: 10px;
+}
+
+/* Simular la foto del instructor pequeña */
+.clase-instructor::before {
+    content: ''; 
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: #b0b3b8;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .clases-title {
+        font-size: 1.8rem;
+    }
+
+    .clases-grid {
+        grid-template-columns: 1fr; /* Una sola columna en móvil */
+    }
+
+    .clase-card {
+        padding: 15px;
+    }
+}

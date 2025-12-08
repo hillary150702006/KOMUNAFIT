@@ -1,3 +1,4 @@
+from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from .models import (
     Usuario,
@@ -6,6 +7,7 @@ from .models import (
     Comunidad,
     Progreso,
     Miembro,
+    Clases,
     ComentarioComunidad
 )
 from .models import Retos,Clases
@@ -42,9 +44,10 @@ class ObjetivoSerializer(ModelSerializer):
 
 
 class ComunidadSerializer(ModelSerializer):
+    username = serializers.CharField(source='usuario.username', read_only=True)
     class Meta:
         model = Comunidad
-        fields = ["usuario", "descripcion", "fecha_creacion"]
+        fields = ["id", "username", "descripcion", "fecha_creacion"]
 
 
 class ProgresoSerializer(ModelSerializer):
@@ -66,4 +69,4 @@ class RetoSerializer(ModelSerializer):
 class ClaseSerializer(ModelSerializer):
     class Meta:
         model = Clases
-        fields = "__all__"
+        fields = [ "id", "nombre_clase", "descripcion_clase", "usuario", "fecha_clase", "hora_clase", "duracion_clase"]

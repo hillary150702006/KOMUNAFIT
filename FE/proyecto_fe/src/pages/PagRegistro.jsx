@@ -21,7 +21,7 @@ const Registro = () => {
         }
         console.log(objUsuario);
         
-        const peticion = await postData('api/api/usuario/',objUsuario)
+        const peticion = await postData('api/usuario/',objUsuario)
         console.log(peticion);
     }
      
@@ -42,7 +42,7 @@ const Registro = () => {
                 <input type="password" id="confirmar-contraseña" name="confirmar-contraseña"onChange={(e)=>setConfirmarClave(e.target.value)} />
 
                
-                    <button onClick={() => {guardarUsuario(); setRegistroExitoso(true);}}className="boton-registrar">Registrarse</button>
+                    <button onClick={guardarUsuario} className="boton-registrar">Registrarse</button>
             </form>
             <p className="login-link">
                 ¿Ya tienes cuenta? <Link to="/login">Inicia sesión aquí</Link>

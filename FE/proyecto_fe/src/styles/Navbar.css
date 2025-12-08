@@ -3,33 +3,28 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 80px;
-  background: transparent;
+  height: 65px;
+ background: linear-gradient(90deg, #cc2e26 0%, #0a0900 );
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 40px;
-  z-index: 1000;
+  padding: 0 37px;
+  z-index: 989;
   font-family: 'Inter', system-ui, sans-serif;
   color: #FFFFFF;
 }
 
+
+
 .navbar-logo h1 {
-  font-size: 26px;
-  font-weight: 800;
+  font-size: 23px;
+  font-weight: 900;
   letter-spacing: -0.02em;
   margin: 0;
+ color: #FFFFFF;
 }
-
-.logo-sparkle {
-  background: linear-gradient(90deg, #FFEBB7 0%, #FFFFFF 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
 
 .navbar-center {
   display: flex;
@@ -46,7 +41,7 @@
 .navbar-search input {
   width: 100%;
   height: 100%;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.05); 
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 9999px;
   padding: 0 20px;
@@ -57,7 +52,7 @@
 }
 
 .navbar-search input::placeholder {
-  color: #52525B;
+  color: #d5d5de;
 }
 
 .navbar-search input:focus {
@@ -97,7 +92,7 @@
 .navbar-actions {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 24px; 
 }
 
 .navbar-icons {
@@ -223,7 +218,7 @@
 }
 
 .btn-ghost-mobile {
-  border: 1px solid rgba(255,255,255,0.3);
+  border: 1px solid rgba(5, 11, 128, 0.3);
   color: white;
 }
 

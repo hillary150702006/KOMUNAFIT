@@ -11,17 +11,17 @@ from .views import ComentarioComunidadCreateView
 from .views import RetoView
 from .views import ClaseView
 urlpatterns = [
-    path("api/perfil/",PerfilSerializerView.as_view()),
-    path("api/objetivo/", ObjetivoSerializerView.as_view()),
-    path("api/usuario/",UsuarioCreateView.as_view()),
-    path("api/comunidad/", comunidadSerializerView.as_view()), 
-    path("api/progreso/", progresoSerializerView.as_view()),
-    path("api/miembro/", MiembroSerializerView.as_view()),
-    path("api/login/", UsuarioLoginView.as_view()),
-    path("api/usuario/<int:id>/",UsuarioPorId.as_view()),
-    path("api/comentario/",ComentarioComunidadCreateView.as_view()),
-    path("api/reto/",RetoView.as_view()),
-    path("api/clase/",ClaseView.as_view()),
+    path("perfil/",PerfilSerializerView.as_view()),
+    path("objetivo/", ObjetivoSerializerView.as_view()),
+    path("usuario/",UsuarioCreateView.as_view()),
+    path("comunidad/", comunidadSerializerView.as_view()),
+    path("progreso/", progresoSerializerView.as_view()),
+    path("miembro/", MiembroSerializerView.as_view()),
+    path("login/", UsuarioLoginView.as_view()),
+    path("usuario/<int:id>/",UsuarioPorId.as_view()),
+    path("comentario/",ComentarioComunidadCreateView.as_view()),
+    path("reto/",RetoView.as_view()),
+    path("clase/",ClaseView.as_view()),
 
 ]
 

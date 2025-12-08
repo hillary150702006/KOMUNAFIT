@@ -1,43 +1,47 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/comunidad.css';
-import { GetData } from '../services/fetch';
+import { GetData, postData } from '../services/fetch'; 
 
 const Comunidad = () => {
-  const [usuarios,setUsuarios] = useState([])
-
-  const [progresos, setProgresos] = useState({});
+  const [usuarios, setUsuarios] = useState([]);
   const [comentarios, setComentarios] = useState({});
   const [likes, setLikes] = useState({});
+  
+  
+  const [nuevaPublicacion, setNuevaPublicacion] = useState('');
 
-
-  useEffect(()=>{
-     async function traerUsuarios() {
-       const peticion = await GetData('api/api/usuario/')
-       setUsuarios(peticion)
-     }
-     traerUsuarios()
-  },[])
-
-  const manejarCambio = (id, campo, valor) => {
-    setProgresos((prev) => ({
-      ...prev,
-      [id]: {
-        ...prev[id],
-        [campo]: valor,
-      },
-    }));
-  };
-
-  const compartirProgreso = (id) => {
-    const progreso = progresos[id];
-    if (progreso) {
-      const usuario = usuarios.find((u) => u.id === id);
-      console.log(`Progreso de ${usuario?.nombre}:`, progreso);
-      alert('¡Progreso compartido!');
+  const handlePublish = async () => {
+    const idAutor = localStorage.getItem('id');
+    if (!idAutor) {
+      alert('Debes iniciar sesión para publicar.');
+      return;
+    }
+    if (nuevaPublicacion.trim()) {
+      const publicacionParaEnviar = {
+        contenido: nuevaPublicacion,
+        usuario: idAutor,
+      };
+      const resultado = await postData('api/comentario/', publicacionParaEnviar);
+      if (resultado) {
+        alert('¡Publicado con éxito!');
+        setNuevaPublicacion('');
+      } else {
+        alert('Hubo un error al publicar.');
+      }
     } else {
-      alert('No hay progreso para compartir');
+      alert('Escribe algo para publicar.');
     }
   };
+  
+  useEffect(() => {
+    async function traerUsuarios() {
+      const peticion = await GetData('api/usuario/');
+      if (peticion) {
+        setUsuarios(peticion);
+      }
+    }
+    traerUsuarios();
+  }, []);
 
   const manejarComentario = (id, valor) => {
     setComentarios((prev) => ({
@@ -74,6 +78,21 @@ const Comunidad = () => {
         satisfechos con su cambio físico.
       </p>
 
+      
+      <div className="crear-publicacion" style={{ marginBottom: '2rem', borderBottom: '1px solid #ccc', paddingBottom: '1rem' }}>
+        <h3>Crea una publicación</h3>
+        <textarea
+          value={nuevaPublicacion}
+          onChange={(e) => setNuevaPublicacion(e.target.value)}
+          placeholder="¿Qué quieres compartir con la comunidad?"
+          style={{ width: '100%', minHeight: '80px', padding: '10px', boxSizing: 'border-box' }}
+        />
+        <button onClick={handlePublish} style={{ marginTop: '10px' }}>Publicar</button>
+      </div>
+    
+
+
+     
       {usuarios.map((usuario) => (
         <div key={usuario.id} className="tarjeta-usuario">
           <h3>{usuario.username}</h3>

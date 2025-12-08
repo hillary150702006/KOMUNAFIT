@@ -10,7 +10,7 @@ const Entrenadores = () => {
   
   useEffect(()=>{
     async function traerEntrenador() {
-      const peticion = await GetData('api/api/usuario/')
+      const peticion = await GetData('api/usuario/')
       const filtroEntrenadores = peticion.filter((entrenador)=>entrenador.rol === "entrenador")
       setEntrenador(filtroEntrenadores)
       console.log(filtroEntrenadores);

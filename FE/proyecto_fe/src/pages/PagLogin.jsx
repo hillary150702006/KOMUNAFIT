@@ -14,10 +14,11 @@ const PagLogin = () => {
             password: claveUsuario,
         };
 
-        const peticion = await postData('api/api/login/', DatosUsuario);
+        const peticion = await postData('api/login/', DatosUsuario);
         if (peticion.mensaje === "usuario valido") {
             navigate("/perfil");
             localStorage.setItem("id", peticion.id);
+            localStorage.setItem("token",peticion.token)
         } else {
             alert("acceso incorrecto");
         }

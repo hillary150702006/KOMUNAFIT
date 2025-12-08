@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import '../styles/Navbar.css';
+import logo from '../assets/logo.png';
 
 
 export default function Navbar() {
@@ -11,9 +12,8 @@ export default function Navbar() {
       <nav className="midnight-navbar">
 
         <div className="navbar-logo">
-          <h1>
-            KomunaFit
-          </h1>
+          
+          <h1>KomunaFit</h1>
         </div>
 
 
@@ -30,6 +30,7 @@ export default function Navbar() {
             <li><a href="/retos">Retos</a></li>
             <li><a href="/clases">Clases</a></li>
             <li><a href="/comunidad">Comunidad</a></li>
+          
           </ul>
         </div>
 
@@ -65,6 +66,7 @@ export default function Navbar() {
               <li><a href="/retos" onClick={() => setIsOpen(false)}>Retos</a></li>
               <li><a href="/clases" onClick={() => setIsOpen(false)}>Clases</a></li>
               <li><a href="/comunidad" onClick={() => setIsOpen(false)}>Comunidad</a></li>
+              
             </ul>
             <div className="mobile-actions">
               <a href="/login" className="btn-ghost-mobile">Iniciar sesión</a>

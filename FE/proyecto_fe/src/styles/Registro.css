@@ -27,7 +27,7 @@
     font-size: 2.2rem;
     font-weight: 700;
     margin-bottom: 2rem;
-    color: #ffffff;
+    color: #ffffff0a;
     text-align: center;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
     letter-spacing: -0.3px;
@@ -101,7 +101,7 @@
     width: 100%;
     padding: 0.875rem 1rem;
     margin-bottom: 1.25rem;
-    border: 2px solid #e2e8f0;
+    border: 2px solid #e3e2f0;
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.95);
     color: #1f2937;
@@ -126,24 +126,24 @@
         0 4px 12px rgba(59, 130, 246, 0.1),
         0 2px 4px rgba(0, 0, 0, 0.1);
     transform: translateY(-2px);
-    background: #ffffff;
+    background: #010c0745;
 }
 
 .formulario-registro input:hover {
-    border-color: #9ca3af;
+    border-color: #051b4056;
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.401);
 }
 
 .formulario-registro input::placeholder {
-    color: #9ca3af;
+    color: #9ca3af2e;
     font-weight: 400;
     font-size: 0.9rem;
 }
 
 .mensaje-error {
-    background: #fef2f2;
-    color: #dc2626;
+    background: #1b14a3;
+    color: #e4e1e1;
     padding: 0.75rem 1rem;
     border-radius: 8px;
     border: 1px solid #fecaca;

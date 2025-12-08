@@ -13,7 +13,7 @@ const Retos = () => {
   useEffect(() => {
     async function traerRetos() {
       try {
-        const peticion = await GetData('api/api/reto/');
+        const peticion = await GetData('api/reto/');
         setRetos(peticion);
         console.log(peticion);
       } catch (error) {

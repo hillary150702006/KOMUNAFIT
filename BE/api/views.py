@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Usuario, Perfil, Objetivo, Comunidad, Progreso, Miembro, ComentarioComunidad
+from .models import Usuario, Perfil, Objetivo, Comunidad,Clases, Progreso, Miembro, ComentarioComunidad
 from .serializers import (
     UsuarioSerializer,
     PerfilSerializer,
@@ -7,13 +7,16 @@ from .serializers import (
     ComunidadSerializer,
     ProgresoSerializer,
     MiembroSerializer,
+    ClaseSerializer, 
     ComentarioComunidadSerializer,
  
 )
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
 from rest_framework.views import APIView
 from rest_framework.generics import ListCreateAPIView
+from rest_framework_simplejwt.tokens import RefreshToken
 
 class UsuarioCreateView(ListCreateAPIView):
     queryset = Usuario.objects.all()
@@ -51,9 +54,11 @@ class UsuarioLoginView(APIView):
         usuario = authenticate(username=nombre_usuario,password=clave)
 
         if usuario is not None:
+            token_acceso = RefreshToken.for_user(usuario).access_token
             return Response({
                 "mensaje": "usuario valido",
-                "id": usuario.id
+                "id": usuario.id,
+                "token": str(token_acceso)
             })
         else:
             return Response({
@@ -62,7 +67,7 @@ class UsuarioLoginView(APIView):
         
 class UsuarioPorId(ListCreateAPIView):
     serializer_class = UsuarioSerializer
-
+    permission_classes = [IsAuthenticated]
     def get_queryset(self):
         id = self.kwargs["id"]
         return Usuario.objects.filter(id=id)

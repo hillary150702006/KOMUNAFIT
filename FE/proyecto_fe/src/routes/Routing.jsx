@@ -6,6 +6,7 @@ import PagEntrenadores from '../pages/PagEntrenadores';
  import PagRetos from '../pages/PagRetos';
  import PagComunidad from '../pages/PagComunidad';
 import Inicio from '../pages/Inicio';
+import PagClases from '../pages/PagClases';
 
 const Routing = () => {
     return (
@@ -17,7 +18,8 @@ const Routing = () => {
                 <Route path="/registro" element={<PagRegistro />} />
                 <Route path="/comunidad" element={<PagComunidad/>} />
                 <Route path="/entrenadores" element={<PagEntrenadores />} />
-                 <Route path="/Retos" element={<PagRetos/>} />
+                <Route path="/Retos" element={<PagRetos/>} />
+                 <Route path="/clases" element={<PagClases/>} />
             </Routes>
         
     );

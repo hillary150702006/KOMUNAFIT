@@ -1,78 +1,76 @@
 
 
+/* Configuración Global Dark Mode */
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Arial', sans-serif;
-  background: url('../assets/retos.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: #ffffff;
+  font-family: 'Segoe UI', 'Roboto', Helvetica, Arial, sans-serif;
+  background-color: #121418; /* Fondo principal oscuro */
+  color: #e4e6eb;
   min-height: 100vh;
 }
 
 .retos-container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 40px 20px;
 }
 
+/* Título de sección */
 .retos-title {
-  text-align: center;
-  font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 50px;
-  color: #ffd700; 
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  letter-spacing: 2px;
+  text-align: left; /* Alineado a la izquierda estilo Dashboard */
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #ffffff;
+  text-shadow: none;
+  letter-spacing: normal;
+  border-left: 5px solid #ff9f43; /* Detalle naranja a la izquierda */
+  padding-left: 15px;
 }
 
+/* Grid de tarjetas */
 .retos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-  gap: 20px;
-  max-width: 1200px;
+  /* Adaptable: tarjetas anchas pero responsivas */
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 25px;
+  width: 100%;
   margin: 0 auto;
 }
 
+/* La Tarjeta de Reto */
 .reto-card {
-  background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+  background: #1e2126; /* Gris oscuro para la tarjeta */
   border-radius: 12px;
-  padding: 25px 20px 20px 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid #333;
+  padding: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #2f3338;
   position: relative;
-  width: 450px;
-  height: 150px;
-  margin: 0 auto;
+  width: auto; /* Ancho automático según el grid */
+  height: auto; /* Altura flexible según contenido */
+  min-height: 180px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   box-sizing: border-box;
   overflow: hidden;
 }
 
+/* Quitamos el triángulo decorativo antiguo */
 .reto-card::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 20px;
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-top: 10px solid #f0f0f0;
+  display: none;
 }
 
-
-
-
-
+/* Efecto Hover */
 .reto-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  border-color: #ff9f43; /* Borde naranja suave al pasar el mouse */
 }
 
+/* Encabezado de la tarjeta (Usuario/Instructor) */
 .reto-header {
   display: flex;
   align-items: center;
@@ -80,151 +78,161 @@ body {
 }
 
 .user-avatar {
-
+  width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(45deg, #3498db, #2ecc71);
-  margin-right: 15px;
+  /* Gradiente o imagen de fondo */
+  background: linear-gradient(135deg, #ff9f43, #ff6b6b);
+  margin-right: 12px;
   flex-shrink: 0;
-  border: 2px solid #ecf0f1;
+  border: none;
 }
+
 .user-name {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  color: #ffffff;
+  color: #b0b3b8; /* Gris claro para el subtítulo */
 }
 
+/* Nombre del Reto */
 .reto-name {
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  margin-top: 15px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  margin-top: 5px;
   color: #ffffff;
+  line-height: 1.3;
 }
 
+/* Etiquetas de Dificultad (Estilo Badges/Píldoras) */
 .reto-difficulty {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #555;
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
 }
 
 .reto-difficulty.facil {
-  color: #27ae60;
-  background: rgba(39, 174, 96, 0.1);
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-size: 0.9rem;
+  color: #2ecc71;
+  background: rgba(46, 204, 113, 0.15);
 }
 
 .reto-difficulty.medio {
-  color: #f39c12;
-  background: rgba(243, 156, 18, 0.1);
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-size: 0.9rem;
+  color: #ff9f43; /* Naranja */
+  background: rgba(255, 159, 67, 0.15);
 }
 
 .reto-difficulty.dificil {
-  color: #e74c3c;
-  background: rgba(231, 76, 60, 0.1);
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-size: 0.9rem;
+  color: #ff6b6b; /* Rojo */
+  background: rgba(255, 107, 107, 0.15);
 }
 
+/* Contenedor de botones de acción/reacción */
 .reaction-buttons {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
+  position: relative; /* Cambiado de absolute para fluidez */
+  bottom: auto;
+  right: auto;
   display: flex;
-  gap: 5px;
+  justify-content: flex-end; /* Alinear a la derecha */
+  gap: 10px;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #2f3338;
 }
 
+/* Botones circulares pequeños (iconos) */
 .reaction-btn {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid #555;
+  background: transparent;
+  border: none;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  font-size: 1rem;
+  width: 35px;
+  height: 35px;
+  font-size: 1.1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+  box-shadow: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
+  color: #b0b3b8;
 }
 
 .reaction-btn:hover {
-  transform: scale(1.1);
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transform: none;
 }
 
 .reaction-btn.active {
-  background: #ff6b6b;
-  color: white;
-  border-color: #ff6b6b;
+  color: #ff6b6b; /* Corazón rojo activo */
 }
 
+/* Botones de Acción Principal (Estilo "Continuar" o "Unirme") */
+/* Reutilizamos las clases existentes like-btn/comment-btn para simular botones de acción */
 .action-buttons {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-top: 20px;
+  gap: 10px;
+  margin-top: auto;
 }
 
 .like-btn, .comment-btn {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid #e0e0e0;
-  border-radius: 20px;
-  padding: 8px 12px;
+  background: #ff9f43; /* Naranja corporativo de la imagen */
+  border: none;
+  border-radius: 6px; /* Bordes ligeramente redondeados, no redondos completos */
+  padding: 8px 20px;
   font-size: 0.9rem;
-  font-weight: 600;
-  color: #333;
+  font-weight: 700;
+  color: #121418; /* Texto oscuro para contraste sobre naranja */
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  display: flex;
+  transition: all 0.2s ease;
+  box-shadow: none;
+  display: inline-flex;
+  justify-content: center;
   align-items: center;
-  gap: 5px;
+  text-decoration: none;
 }
 
-.like-btn:hover, .comment-btn:hover {
-  background: rgba(255, 255, 255, 1);
-  transform: scale(1.02);
+/* Variante secundaria para el segundo botón */
+.comment-btn {
+  background: transparent;
+  border: 1px solid #b0b3b8;
+  color: #e4e6eb;
 }
 
-.like-btn.liked {
-  background: #ff6b6b;
-  color: white;
-  border-color: #ff6b6b;
+.like-btn:hover {
+  background: #ffb74d; /* Naranja más claro */
+  transform: translateY(-2px);
 }
 
-.reaction-buttons {
-  display: flex;
-  gap: 5px;
-  margin-top: 10px;
+.comment-btn:hover {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .no-retos {
   text-align: center;
-  font-size: 1.5rem;
-  color: #cccccc;
+  font-size: 1.2rem;
+  color: #b0b3b8;
   margin-top: 50px;
 }
 
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 768px) {
   .retos-title {
-    font-size: 2.5rem;
-  }
-
-  .reto-card {
-    padding: 20px;
+    font-size: 1.5rem;
+    margin-left: 0;
+    padding-left: 10px;
   }
 
   .retos-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Una columna en móvil */
+  }
+  
+  .reto-card {
+    width: 100%;
+    margin-bottom: 15px;
   }
 }
