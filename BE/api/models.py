@@ -10,6 +10,7 @@ class Usuario(AbstractUser):
     )
     rol = models.CharField(max_length=20, choices=ROL_OPCIONES,default="usuario")
     fecha_registro = models.DateTimeField(auto_now_add=True)
+    foto = models.ImageField(upload_to='fotos_perfil/', blank=True, null=True)
 
 
 class Perfil(models.Model):

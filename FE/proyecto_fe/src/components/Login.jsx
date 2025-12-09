@@ -19,7 +19,7 @@ const Login = () => {
         console.log(peticion);
         
         if (peticion.mensaje === "usuario valido") {
-            // No guardar datos en localStorage para respetar la privacidad
+            
             navigate("/perfil");
         } else {
             alert("acceso incorrecto");

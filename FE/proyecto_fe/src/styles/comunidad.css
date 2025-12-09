@@ -116,7 +116,6 @@
 }
 
 .tarjeta-usuario:nth-child(3n+1)::before {
-  content: 'Amigos';
   display: block;
   font-size: 0.8rem;
   color: var(--color-acento);
@@ -125,7 +124,6 @@
 }
 
 .tarjeta-usuario:nth-child(3n+2)::before {
-  content: 'Comentarios';
   display: block;
   font-size: 0.8rem;
   color: var(--color-acento);
@@ -134,7 +132,6 @@
 }
 
 .tarjeta-usuario:nth-child(3n+3)::before {
-  content: 'Personas que quizá conozcas';
   display: block;
   font-size: 0.8rem;
   color: var(--color-acento);
@@ -143,7 +140,6 @@
 }
 
 .tarjeta-usuario:nth-child(3n+2)::after {
-  content: 'Comentario: hola';
   display: block;
   margin-top: 0.5rem;
   color: #666;

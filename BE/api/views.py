@@ -11,7 +11,7 @@ from .serializers import (
     ComentarioComunidadSerializer,
  
 )
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
 from rest_framework.views import APIView
@@ -21,6 +21,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 class UsuarioCreateView(ListCreateAPIView):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
+    permission_classes = [AllowAny]
 
 class ComentarioComunidadCreateView(ListCreateAPIView):
     queryset = ComentarioComunidad.objects.all()

@@ -11,7 +11,6 @@ const Registro = () => {
     const [claveUsuarios, setClaveUsuariio] = useState("")
     const [confirmarClave, setConfirmarClave] = useState("")
     const [error, setError] = useState("");
-    const [registroExitoso, setRegistroExitoso] = useState(false);
 
     async function guardarUsuario(e) {
         e.preventDefault()
@@ -29,12 +28,12 @@ const Registro = () => {
         }
 
         try {
-            const peticion = await postData('api/usuario/', objUsuario); 
-        if (peticion && peticion.id) {
-            alert('Registrado correctamente');
-            
-            navigate('/perfil');
-        } else {
+            const peticion = await postData('api/api/usuario/',objUsuario)
+            if (peticion && peticion.id) {
+                alert('Registro exitoso, bienvenido');
+                localStorage.setItem('user', JSON.stringify(objUsuario));
+                navigate('/perfil');
+            } else {
                 const errorMessage = peticion.detail || "Error en el registro. Inténtalo de nuevo.";
                 setError(errorMessage);
             }
@@ -67,7 +66,7 @@ const Registro = () => {
 
                     {error && <p className="mensaje-error">{error}</p>}
 
-                    <button type="submit" className="boton-registrar">Registrarse</button>
+                    <button onClick={() => {guardarUsuario(); setRegistroExitoso(true);}}className="boton-registrar">Registrarse</button>
                 </form>
             )}
             {!registroExitoso && (
@@ -77,6 +76,6 @@ const Registro = () => {
             )}
         </div>
     )
-} 
+}
 
 export default Registro;

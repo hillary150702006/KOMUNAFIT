@@ -1,52 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Perfil.css';
-import { GetData } from '../services/fetch';
+import { GetData, GetDataAutenticado } from '../services/fetch';
 import { useLocation } from "react-router-dom";
 
 function Perfil() {
   const [isEditing, setIsEditing] = useState(false);
   const [activeTab, setActiveTab] = useState('Información Personal');
   const [mostrarEdicion, setMostrarEdicion] = useState(false);
-  const [profileData, setProfileData] = useState({
-    nombre: '',
-    email: '',
-    altura: '',
-    peso: '',
-    fechaNacimiento: '',
-    genero: ''
-  });
-
+  const [profileData, setProfileData] = useState([])
 
   useEffect(() => {
     async function fetchUserData() {
-     
-      const userId = localStorage.getItem('id');
-
-      if (userId) {
         try {
-      
-          const userData = await GetData(`api/usuario/${userId}/`);
-          
+          const userData = await GetDataAutenticado(`api/usuario/${localStorage.getItem('id')}/`);
        
           if (userData) {
-            setProfileData({
-              nombre: userData.username || '',
-              email: userData.email || '',
-              altura: userData.altura || '',
-              peso: userData.peso || '',
-              fechaNacimiento: userData.fecha_nacimiento || '',
-              genero: userData.genero || ''
-            });
+            setProfileData(userData[0])
           }
         } catch (error) {
           console.error("Error al obtener los datos del perfil:", error);
         }
       }
-    }
-
-    fetchUserData();
-  }, []);
-
+      fetchUserData()
+    },[])
   const [photoFile, setPhotoFile] = useState(null);
   const [photoPreview, setPhotoPreview] = useState('/ruta/a/foto.jpg');
   const [objetivos, setObjetivos] = useState([
@@ -139,6 +115,11 @@ function Perfil() {
     }
   };
 
+  const formatoFecha = (fecha) =>{
+    const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(fecha).toLocaleDateString(undefined, opciones);
+  }
+
   return (
     <div className="perfil-usuario">
       <div className="fondo-gimnasio" />
@@ -154,12 +135,12 @@ function Perfil() {
               </label>
             </div>
           )}
-          <h2 className="nombre-usuario">{profileData.nombre}</h2>
-          <p className="miembro-desde">Miembro desde enero 2023</p>
+          <h2 className="nombre-usuario">{profileData.username}</h2>
+          <p className="miembro-desde">Miembro desde {formatoFecha(profileData.fecha_registro)}</p>
         </div>
 
         <div className="estadisticas-usuario">
-          <div className="dato"><span>Amigos</span></div>
+          <div className="dato"><span>Seguidos</span></div>
           <div className="dato"><span>Asistencias</span></div>
           <div className="dato"><span>Completadas</span></div>
         </div>
@@ -213,44 +194,6 @@ function Perfil() {
               readOnly={!isEditing}
             />
 
-            <label>Altura</label>
-            <input
-              type="text"
-              name="altura"
-              value={profileData.altura}
-              onChange={handleInputChange}
-              readOnly={!isEditing}
-            />
-
-            <label>Peso</label>
-            <input
-              type="text"
-              name="peso"
-              value={profileData.peso}
-              onChange={handleInputChange}
-              readOnly={!isEditing}
-            />
-
-            <label>Fecha de Nacimiento</label>
-            <input
-              type="text"
-              name="fechaNacimiento"
-              value={profileData.fechaNacimiento}
-              onChange={handleInputChange}
-              readOnly={!isEditing}
-            />
-
-            <label>Género</label>
-            <select
-              name="genero"
-              value={profileData.genero}
-              onChange={handleInputChange}
-              disabled={!isEditing}
-            >
-              <option value="masculino">Masculino</option>
-              <option value="femenino">Femenino</option>
-              <option value="otro">Otro</option>
-            </select>
 
             <div className="botones-formulario">
               {isEditing && <button type="submit">Guardar Cambios</button>}

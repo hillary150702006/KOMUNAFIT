@@ -4,7 +4,7 @@ import { GetData, postData } from '../services/fetch';
 
 const Comunidad = () => {
   const [usuarios, setUsuarios] = useState([]);
-  const [comentarios, setComentarios] = useState({});
+  const [comentarios, setComentarios] = useState([]);
   const [likes, setLikes] = useState({});
   
   
@@ -18,8 +18,9 @@ const Comunidad = () => {
     }
     if (nuevaPublicacion.trim()) {
       const publicacionParaEnviar = {
-        contenido: nuevaPublicacion,
+        comentario: nuevaPublicacion,
         usuario: idAutor,
+        usuario_comentario: idAutor
       };
       const resultado = await postData('api/comentario/', publicacionParaEnviar);
       if (resultado) {
@@ -34,13 +35,13 @@ const Comunidad = () => {
   };
   
   useEffect(() => {
-    async function traerUsuarios() {
-      const peticion = await GetData('api/usuario/');
+    async function traerComentarios() {
+      const peticion = await GetData('api/comentario/');
       if (peticion) {
-        setUsuarios(peticion);
+        setComentarios(peticion);
       }
     }
-    traerUsuarios();
+    traerComentarios();
   }, []);
 
   const manejarComentario = (id, valor) => {
@@ -89,28 +90,18 @@ const Comunidad = () => {
         />
         <button onClick={handlePublish} style={{ marginTop: '10px' }}>Publicar</button>
       </div>
-    
-
 
      
-      {usuarios.map((usuario) => (
-        <div key={usuario.id} className="tarjeta-usuario">
-          <h3>{usuario.username}</h3>
-          <input
-            type="text"
-            value={comentarios[usuario.id] || ''}
-            onChange={(e) => manejarComentario(usuario.id, e.target.value)}
-            placeholder="Escribe un comentario..."
-          />
+      {comentarios.map((comentario) => (
+        <div key={comentario.id} className="tarjeta-usuario">
+          <h3>comentario hecho por {comentario.nombre_usuario}</h3>
+          <p>{comentario.comentario}</p>
           <div className="acciones-usuario">
-            <button onClick={() => enviarComentario(usuario.id)}>
-              Enviar comentario
-            </button>
             <button
-              className={`like-btn ${likes[usuario.id] ? 'liked' : ''}`}
-              onClick={() => manejarLike(usuario.id)}
+              className={`like-btn ${likes[comentario.id] ? 'liked' : ''}`}
+              onClick={() => manejarLike(comentario.id)}
             >
-              {likes[usuario.id] ? '❤️ Liked' : '🤍 Like'}
+              {likes[comentario.id] ? '❤️ Liked' : '🤍 Like'}
             </button>
           </div>
         </div>

@@ -1,7 +1,4 @@
 
-
-
-
 .contenedor-principal {
     position: relative;
     width: 100%;
@@ -11,7 +8,7 @@
     align-items: center;
     font-family: 'Montserrat', sans-serif;
     overflow: hidden;
-     background-image: url('../assets/komufit.png');
+    background-color: #2e2d79;
    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

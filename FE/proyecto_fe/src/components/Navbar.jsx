@@ -12,7 +12,7 @@ export default function Navbar() {
       <nav className="midnight-navbar">
 
         <div className="navbar-logo">
-          
+
           <h1>KomunaFit</h1>
         </div>
 
@@ -30,16 +30,24 @@ export default function Navbar() {
             <li><a href="/retos">Retos</a></li>
             <li><a href="/clases">Clases</a></li>
             <li><a href="/comunidad">Comunidad</a></li>
-          
+
           </ul>
         </div>
 
 
-
-        <div className="navbar-actions">
-          <a href="/login" className="btn-ghost btn-login">Iniciar sesión</a>
-          <a href="/registro" className="btn-ghost btn-registration">Registrarse</a>
-        </div>
+        {localStorage.getItem('token') ? (
+          <div className="navbar-actions">
+            <a href="/perfil" className="btn-ghost btn-login">Perfil</a>
+            <a onClick={()=>{
+              localStorage.clear()
+            }}  href="/" className="btn-ghost btn-registration">Cerrar sesión</a>
+          </div>
+        ) : (
+          <div className="navbar-actions">
+            <a href="/login" className="btn-ghost btn-login">Iniciar sesión</a>
+            <a href="/registro" className="btn-ghost btn-registration">Registrarse</a>
+          </div>
+        )}
 
 
 
@@ -66,7 +74,7 @@ export default function Navbar() {
               <li><a href="/retos" onClick={() => setIsOpen(false)}>Retos</a></li>
               <li><a href="/clases" onClick={() => setIsOpen(false)}>Clases</a></li>
               <li><a href="/comunidad" onClick={() => setIsOpen(false)}>Comunidad</a></li>
-              
+
             </ul>
             <div className="mobile-actions">
               <a href="/login" className="btn-ghost-mobile">Iniciar sesión</a>

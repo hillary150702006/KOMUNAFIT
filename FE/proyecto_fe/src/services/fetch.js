@@ -24,15 +24,43 @@ async function GetData(endpoint) {
                 'Content-Type': 'application/json'
             }
         })
+        
+        if (!peticion.ok) {
+            throw new Error(`HTTP error! status: ${peticion.status}`);
+        }
+        
         const data = await peticion.json()
         console.log(data);
         return data
     } catch (error) {
-        console.error(error);
+        console.error('Error in GetData:', error);
+        throw error;
     }
 }
 export {GetData}
-
+async function GetDataAutenticado(endpoint) {
+    try {
+        const peticion = await fetch(`http://127.0.0.1:8000/${endpoint}`,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+        
+        if (!peticion.ok) {
+            throw new Error(`HTTP error! status: ${peticion.status}`);
+        }
+        
+        const data = await peticion.json()
+        console.log(data);
+        return data
+    } catch (error) {
+        console.error('Error in GetData:', error);
+        throw error;
+    }
+}
+export {GetDataAutenticado}
 async function patchData(endpoint,obj) {
     try {
         const peticion = await fetch(`http://127.0.0.1:8000/${endpoint}`,{

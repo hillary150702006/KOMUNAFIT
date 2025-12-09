@@ -14,9 +14,10 @@ from .models import Retos,Clases
 
 
 class UsuarioSerializer(ModelSerializer):
+    foto = serializers.ImageField(required=False)
     class Meta:
         model = Usuario
-        fields = ["id", "username",'password', "first_name", "last_name", "email", "rol"]
+        fields = ["id", "username", "first_name", "last_name", "email", "rol", "foto","fecha_registro", "password"]
 
     def create(self,validated_data):
         clave = validated_data.pop("password")
@@ -32,9 +33,10 @@ class PerfilSerializer(ModelSerializer):
         fields = ["usuario", "peso", "altura"]
 
 class ComentarioComunidadSerializer(ModelSerializer):
+    nombre_usuario = serializers.CharField(source='usuario.username', read_only=True)
     class Meta:
         model = ComentarioComunidad
-        fields = '__all__'
+        fields = "__all__"
 
 
 class ObjetivoSerializer(ModelSerializer):
