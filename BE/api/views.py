@@ -1,5 +1,9 @@
 from django.shortcuts import render
 from .models import Usuario, Perfil, Objetivo, Comunidad,Clases, Progreso, Miembro, ComentarioComunidad
+from rest_framework.generics import DestroyAPIView
+from .serializers import RetoSerializer,ClaseSerializer
+from .models import Clases,Retos
+
 from .serializers import (
     UsuarioSerializer,
     PerfilSerializer,
@@ -73,9 +77,6 @@ class UsuarioPorId(ListCreateAPIView):
         id = self.kwargs["id"]
         return Usuario.objects.filter(id=id)
 
-from .serializers import RetoSerializer,ClaseSerializer
-from .models import Clases,Retos
-
 class RetoView(ListCreateAPIView):
     queryset = Retos.objects.all()
     serializer_class = RetoSerializer
@@ -84,4 +85,8 @@ class ClaseView(ListCreateAPIView):
     queryset = Clases.objects.all()
     serializer_class = ClaseSerializer
 
-
+class EliminarComentarioComunidadView(DestroyAPIView):
+    queryset = ComentarioComunidad.objects.all()
+    serializer_class = ComentarioComunidadSerializer
+    # permission_classes = [IsAuthenticated]
+    lookup_field = 'id'

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Perfil.css';
-import { GetData, GetDataAutenticado } from '../services/fetch';
+import { postData, GetDataAutenticado, patchData, DeleteData, GetData } from '../services/fetch';
 import { useLocation } from "react-router-dom";
 
 function Perfil() {
@@ -8,8 +8,27 @@ function Perfil() {
   const [activeTab, setActiveTab] = useState('Información Personal');
   const [mostrarEdicion, setMostrarEdicion] = useState(false);
   const [profileData, setProfileData] = useState([])
+  const [comentarios, setComentarios] = useState([])
 
+  
   useEffect(() => {
+    const fetchComentarios = async () => {
+        try {
+          const data = await GetData('api/comentario/');
+          const userId = localStorage.getItem('id');
+          const comentariosUsuarios = data.filter(comentario => comentario.usuario === parseInt(userId));
+          setComentarios(comentariosUsuarios);
+          console.log(comentariosUsuarios);
+          
+        } catch (error) {
+          console.error("Error al obtener los comentarios:", error);
+        }
+    };
+
+    fetchComentarios();
+  }, [activeTab]); 
+    useEffect(()=>{
+
     async function fetchUserData() {
         try {
           const userData = await GetDataAutenticado(`api/usuario/${localStorage.getItem('id')}/`);
@@ -24,7 +43,7 @@ function Perfil() {
       fetchUserData()
     },[])
   const [photoFile, setPhotoFile] = useState(null);
-  const [photoPreview, setPhotoPreview] = useState('/ruta/a/foto.jpg');
+  const [photoPreview, setPhotoPreview] = useState('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png');
   const [objetivos, setObjetivos] = useState([
     'Bajar 11 kilos en 4 meses',
     'Hacer la dieta carnivora ',
@@ -41,15 +60,22 @@ function Perfil() {
     confirmPassword: ''
   });
   const [actividades, setActividades] = useState([
-    'Entrenamiento de fuerza 3 veces a la semana',
-    'Caminar unos 10.000 pasos diarios',
-    'Consumir proteína magra ',
-    'Levantarme temprano ir al gym y tomarme el preentreno',
-    'Romper el ayuno a medio dia con proteína y grasa saludable'
+   
   ]);
   const [newObjetivo, setNewObjetivo] = useState('');
   const [newPreferencia, setNewPreferencia] = useState('');
   const [newActividad, setNewActividad] = useState('');
+    
+
+  const handleDeleteComentario = async (id) => {
+    try {
+      await DeleteData(`api/comentario/eliminar/${id}/`);
+      setComentarios(comentarios.filter(comentario => comentario.id !== id));
+    } catch (error) {
+      console.error("Error al eliminar el comentario:", error);
+    }
+  };
+  
 
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
@@ -281,27 +307,27 @@ function Perfil() {
         )}
 
         {activeTab === 'Actividad Reciente' && (
-          <div className="contenido-tab">
-            <h3>Actividad Reciente</h3>
+        <div className="contenido-tab">
+          <h2>Actividad Reciente</h2>
+          {comentarios.length > 0 ? (
             <ul>
-              {actividades.map((act, index) => <li key={index}>{act}</li>)}
+              {comentarios.map(comentario => (
+                <li key={comentario.id}>
+                  <p><strong>Comunidad:</strong> {comentario.id}</p>
+                  <p>{comentario.comentario}</p>
+                  <button onClick={() => handleDeleteComentario(comentario.id)}>Eliminar</button>
+                </li>
+              ))}
             </ul>
-            {isEditing && (
-              <div>
-                <input
-                  type="text"
-                  value={newActividad}
-                  onChange={(e) => setNewActividad(e.target.value)}
-                  placeholder="Agregar nueva actividad"
-                />
-                <button onClick={handleAddActividad}>Agregar Actividad</button>
-              </div>
-            )}
+          ) : (
+            <p>No has publicado ningún comentario aún.</p>
+           )}
           </div>
         )}
       </div>
     </div>
   );
 }
+        
 
 export default Perfil;

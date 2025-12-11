@@ -10,6 +10,7 @@ from .views import UsuarioPorId
 from .views import ComentarioComunidadCreateView
 from .views import RetoView
 from .views import ClaseView
+from .views import EliminarComentarioComunidadView
 urlpatterns = [
     path("perfil/",PerfilSerializerView.as_view()),
     path("objetivo/", ObjetivoSerializerView.as_view()),
@@ -22,6 +23,7 @@ urlpatterns = [
     path("comentario/",ComentarioComunidadCreateView.as_view()),
     path("reto/",RetoView.as_view()),
     path("clase/",ClaseView.as_view()),
+    path("comentario/eliminar/<int:id>/", EliminarComentarioComunidadView.as_view()),
 
 ]
 

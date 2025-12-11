@@ -5,19 +5,19 @@ import { FaDribbble, FaTwitter, FaLinkedin, FaFacebook } from "react-icons/fa";
 import '../styles/Entrenadores.css';
 
 const imagenesEntrenadores = [
-  "https://images.pexels.com/photos/39721/woman-sport-fitness-gym-39721.jpeg", // Ana Paola
-  "https://images.pexels.com/photos/2261477/pexels-photo-2261477.jpeg", // Angelo Sanchez
-  "https://images.pexels.com/photos/4662433/pexels-photo-4662433.jpeg", // Miriam
-  "https://images.pexels.com/photos/674020/pexels-photo-674020.jpeg", // Daniel
-  "https://images.pexels.com/photos/3823059/pexels-photo-3823059.jpeg", // Miranda
+  "https://images.pexels.com/photos/3776149/pexels-photo-3776149.jpeg", // Ana Paola
+  "https://i.pinimg.com/736x/69/11/bb/6911bb7eeec8a623e0af6947fc21ec6c.jpg", // Angelo Sanchez
+  "https://i.pinimg.com/736x/3b/89/28/3b89280c690a7eb89bdc2f52a4a54afa.jpg", // Miriam
+  "https://i.pinimg.com/1200x/90/f4/eb/90f4ebec33a13a05fbe878b805e35d84.jpg", // Daniel
+  "https://i.pinimg.com/736x/e4/5e/78/e45e7865b06e83f4081faff564e76e53.jpg", // Miranda
   "https://images.pexels.com/photos/8373566/pexels-photo-8373566.jpeg", // Camila
-  "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg", // Byron
-  "https://images.pexels.com/photos/3757374/pexels-photo-3757374.jpeg", // Pamela
+  "https://i.pinimg.com/1200x/81/37/11/8137117a775c524f2d94ebe0b93012c3.jpg", // Byron
+  "https://images.pexels.com/photos/14039255/pexels-photo-14039255.jpeg", // Pamela
   "https://images.pexels.com/photos/712513/pexels-photo-712513.jpeg", // Gabriela (Gaby)
-  "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg", // Lucia
+  "https://images.pexels.com/photos/7951666/pexels-photo-7951666.jpeg", // Lucia
   "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg", // Alex Rodolfo
-  "https://images.pexels.com/photos/1323705/pexels-photo-1323705.jpeg", // Yanssy
-  "https://images.pexels.com/photos/432059/pexels-photo-432059.jpeg", // Sebastián
+  "https://i.pinimg.com/1200x/1c/9a/f2/1c9af20e150ee3a659354c9d328d0284.jpg", // Yanssy
+  "https://i.pinimg.com/1200x/de/9c/fc/de9cfcb63502e8cbb8720374b5aa19b1.jpg", // Sebastián
 ];
 
 

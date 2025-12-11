@@ -78,3 +78,32 @@ async function patchData(endpoint,obj) {
     }
 }
 export {patchData}
+
+
+async function DeleteData(endpoint) {
+    try {
+        const response = await fetch(`http://127.0.0.1:8000/${endpoint}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+
+        if (!response.ok && response.status !== 204) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+     
+        if (response.status === 204) {
+            return null;
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error in DeleteData:', error);
+        throw error;
+    }
+}
+export { DeleteData };

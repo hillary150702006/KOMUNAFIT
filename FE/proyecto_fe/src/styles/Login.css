@@ -1,120 +1,139 @@
 
+
 .contenedor-principal {
+
     position: relative;
     width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Montserrat', sans-serif;
+  
+    font-family: 'Montserrat', sans-serif; 
     overflow: hidden;
-    background-color: #2e2d79;
-   background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+   
+    background-color: #0d0d0d; 
 }
-
+    
+    
 .fondo-gimnasio {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    
+   
+    
     background-size: cover;
     background-position: center;
     z-index: 1;
+    
    
-    animation: gymBreath 30s infinite alternate;
+    background-color: rgba(0, 0, 0, 0.6); 
+    background-blend-mode: darken;
+    
+  
+    animation: gymBreath 35s infinite alternate ease-in-out;
 }
 
 @keyframes gymBreath {
     0% { transform: scale(1); }
-    100% { transform: scale(1.15); }
+    100% { transform: scale(1.08); } 
 }
+
 
 
 .contenedor-login {
     position: relative;
     z-index: 10;
     width: 100%;
-    max-width: 400px;
-    padding: 3rem;
+    max-width: 420px; 
+    padding: 3.5rem 3rem; 
     
-  
-    background: rgba(20, 20, 20, 0.85); 
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
     
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.1); 
-    box-shadow: 0 20px 50px rgba(0,0,0, 0.8); 
+    background: rgba(10, 10, 10, 0.95); 
     
-    color: #090909;
+    
+    backdrop-filter: blur(18px); 
+    -webkit-backdrop-filter: blur(18px);
+    
+    
+    border-radius: 12px;
+    border: 1px solid rgba(0, 224, 255, 0.15); 
+    
+    
+    box-shadow: 0 40px 80px rgba(0,0,0, 0.9); 
+    
+    color: #f5f5f5; 
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 1.5rem;
     
     
-    animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: slideUp 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
 @keyframes slideUp {
-    0% { opacity: 0; transform: translateY(50px) scale(0.95); }
+    0% { opacity: 0; transform: translateY(80px) scale(0.9); }
     100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 
+
 .logo-komunafit h1 {
-    font-size: 2.8rem;
+    font-size: 3.5rem; 
     font-weight: 900;
-    font-style: italic;
+    font-style: normal; 
     text-transform: uppercase;
     text-align: center;
     margin: 0;
     line-height: 1;
     
   
-    background: linear-gradient(90deg, #fff, #a1a1aa);
-    
+    background: linear-gradient(90deg, #ffffff 30%, #00e0ff 90%);
     -webkit-text-fill-color: transparent;
     
-  
-    text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
+    text-shadow: 0px 0px 15px rgba(0, 224, 255, 0.6); 
+    margin-bottom: 0.5rem;
 }
 
 .mensaje-bienvenida {
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 1rem; /* Un poco más grande */
     font-weight: 400;
-    color: #a1a1aa; 
+    color: #999999; /* Gris suave */
     margin: 0;
-    margin-bottom: 1rem;
-    letter-spacing: 0.5px;
+    margin-bottom: 2rem; /* Más espacio después del mensaje */
+    letter-spacing: 0.8px; /* Más espaciado para mejor lectura */
 }
 
+/* --- 5. FORMULARIO Y CAMPOS DE ENTRADA --- */
 .formulario-login {
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 1.5rem;
 }
 
 .formulario-login label {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     font-weight: 700;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px; /* Más espaciado */
     color: #00e0ff; 
-    margin-bottom: 5px;
+    margin-bottom: 0.3rem; /* Espacio reducido */
     display: block;
 }
 
 .campo-texto {
     width: 100%;
-    padding: 14px;
-    font-size: 1rem;
+    padding: 16px; /* Más alto */
+    font-size: 1.1rem; /* Fuente más grande */
     color: #fff;
-    background-color: #2a2a2a;
-    border: 2px solid transparent;
+    /* Fondo más oscuro, casi negro */
+    background-color: #1a1a1a; 
+    /* Borde cian sutil */
+    border: 1px solid #333; 
     border-radius: 8px;
     outline: none;
     transition: all 0.3s ease;
@@ -122,65 +141,77 @@
 }
 
 .campo-texto::placeholder {
-    color: #666;
+    color: #555; /* Placeholder más discreto */
 }
 
 .campo-texto:focus {
-    background-color: #333;
-    border-color: #00e0ff; /* Borde brillante al escribir */
-    box-shadow: 0 0 15px rgba(0, 224, 255, 0.2);
+    background-color: #111; /* Se oscurece ligeramente */
+    border-color: #00e0ff; /* Borde cian brillante */
+    box-shadow: 0 0 15px rgba(0, 224, 255, 0.4); 
 }
 
-/* --- 6. BOTÓN DE ACCIÓN --- */
+
 .boton-iniciar {
-    margin-top: 1rem;
-    padding: 16px;
-    font-size: 1rem;
-    font-weight: 800;
+    margin-top: 1.5rem;
+    padding: 18px;
+    font-size: 1.1rem;
+    font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     color: #000;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     
-    /* Gradiente energético (Cian a Azul) */
-    background: linear-gradient(135deg, #00e0ff 0%, #0073ff 100%);
-    box-shadow: 0 4px 15px rgba(0, 224, 255, 0.4);
+  
+    background: linear-gradient(135deg, #00e0ff 0%, #3e00ff 100%); 
     
-    transition: transform 0.2s, box-shadow 0.2s;
+  
+    box-shadow: 0 8px 30px rgba(0, 224, 255, 0.6); 
+    
+    transition: transform 0.2s, box-shadow 0.3s, filter 0.3s;
 }
 
 .boton-iniciar:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 25px rgba(0, 224, 255, 0.6);
+    transform: translateY(-5px);
+
+    box-shadow: 0 12px 40px rgba(0, 224, 255, 0.8); 
+    filter: brightness(1.1); 
 }
 
 .boton-iniciar:active {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 224, 255, 0.5);
 }
 
-/* --- 7. ENLACES SECUNDARIOS --- */
 .enlace-olvido {
     display: block;
     text-align: center;
-    color: #888;
+    color: #777; 
     text-decoration: none;
-    font-size: 0.85rem;
-    margin-top: 5px;
+    font-size: 0.9rem; 
+    margin-top: 1rem; 
     transition: color 0.3s;
 }
 
 .enlace-olvido:hover {
-    color: #fff;
+    color: #00e0ff; 
 }
 
-/* El enlace de crear cuenta lo hacemos resaltar un poco más */
+
 a[href="/registro"] {
     color: #fff;
-    font-weight: 600;
-    border-bottom: 1px solid #00e0ff;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-bottom: 2px solid #00e0ff; 
     width: fit-content;
-    margin: 10px auto 0;
+    margin: 20px auto 0;
     padding-bottom: 2px;
+    letter-spacing: 1px;
+    transition: color 0.3s, border-color 0.3s;
+} 
+
+a[href="/registro"]:hover {
+    color: #00e0ff;
+    border-color: #fff;
 }
