@@ -3,12 +3,15 @@ import '../styles/Clases.css';
 import { GetData } from '../services/fetch';
 import { Link } from 'react-router-dom';
 
-
+/*Este componente tiene como función obtener clases disponibles desde la API del backend*/ 
 const Clases = () => {
+    /*Por acá tiene un estado para almacenar la lista de las clases obtenidas de la API, inicializa con una array vacía para evitar errores antes de la carga */ 
     const [clases, setClases] = useState([]);
 
     useEffect(() => {
+        /*Por acá tiene una función asincrona , es muy útil para traer datos a un servidor  y el await para manejar operaciones como las peticiones de la API*/
         async function traerClases() {
+            /*EL try catch es muy importante para manejar errores que puedan ocurrir durante la obtención de datos, en este caso, si hay un error al hacer la petición a la API, se captura y se muestra en la consola*/ 
             try {
                 const peticion = await GetData('api/clase/');
                 setClases(peticion);

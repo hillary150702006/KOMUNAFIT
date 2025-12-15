@@ -45,14 +45,10 @@ function Perfil() {
   const [photoFile, setPhotoFile] = useState(null);
   const [photoPreview, setPhotoPreview] = useState('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png');
   const [objetivos, setObjetivos] = useState([
-    'Bajar 11 kilos en 4 meses',
-    'Hacer la dieta carnivora ',
-    'Dormir 8hras diarias y levantarme temprano'
+  
   ]);
   const [preferencias, setPreferencias] = useState([
-    'Usar la caminadora en casa ',
-    'Ir al gimnasio 3 veces por semana y alternar en casa',
-    'Usar más peso y lograr la recomposición corporal'
+    
   ]);
   const [seguridad, setSeguridad] = useState({
     currentPassword: '',

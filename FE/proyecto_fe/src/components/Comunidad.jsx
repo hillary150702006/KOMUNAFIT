@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../styles/comunidad.css';
 import { GetData, postData } from '../services/fetch'; 
 
+// Este componente se encarga de mostrar y permitir la creación de publicaciones en la comunidad.
 const Comunidad = () => {
   const [usuarios, setUsuarios] = useState([]);
   const [comentarios, setComentarios] = useState([]);
@@ -11,12 +12,14 @@ const Comunidad = () => {
   const [nuevaPublicacion, setNuevaPublicacion] = useState('');
 
   const handlePublish = async () => {
+    // Obtenemos el ID del usuario que está logueado desde el localStorage.
     const idAutor = localStorage.getItem('id');
     if (!idAutor) {
       alert('Debes iniciar sesión para publicar.');
       return;
     }
     if (nuevaPublicacion.trim()) {
+       // Creamos el objeto que se enviará a la API.
       const publicacionParaEnviar = {
         comentario: nuevaPublicacion,
         usuario: idAutor,
@@ -94,6 +97,7 @@ const Comunidad = () => {
      
       {comentarios.map((comentario) => (
         <div key={comentario.id} className="tarjeta-usuario">
+        {/* Mostramos el nombre del autor y el contenido del comentario */}
           <h3>comentario hecho por {comentario.nombre_usuario}</h3>
           <p>{comentario.comentario}</p>
           <div className="acciones-usuario">
