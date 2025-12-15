@@ -1,238 +1,511 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-
-/* Configuración Global Dark Mode */
+/* Configuración Global */
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', 'Roboto', Helvetica, Arial, sans-serif;
-  background-color: #121418; /* Fondo principal oscuro */
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
   color: #e4e6eb;
   min-height: 100vh;
 }
 
-.retos-container {
+.retos-page {
+  min-height: 100vh;
+}
+
+/* Header */
+.retos-header {
+  background: rgba(17, 24, 39, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #EC4899;
+}
+
+.header-content {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 40px 20px;
-}
-
-/* Título de sección */
-.retos-title {
-  text-align: left; /* Alineado a la izquierda estilo Dashboard */
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 30px;
-  color: #ffffff;
-  text-shadow: none;
-  letter-spacing: normal;
-  border-left: 5px solid #ff9f43; /* Detalle naranja a la izquierda */
-  padding-left: 15px;
-}
-
-/* Grid de tarjetas */
-.retos-grid {
-  display: grid;
-  /* Adaptable: tarjetas anchas pero responsivas */
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 25px;
-  width: 100%;
-  margin: 0 auto;
-}
-
-/* La Tarjeta de Reto */
-.reto-card {
-  background: #1e2126; /* Gris oscuro para la tarjeta */
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: 1px solid #2f3338;
-  position: relative;
-  width: auto; /* Ancho automático según el grid */
-  height: auto; /* Altura flexible según contenido */
-  min-height: 180px;
+  padding: 1.5rem 1rem;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: space-between;
-  box-sizing: border-box;
+}
+
+.header-title-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header-icon {
+  color: #EC4899;
+  font-size: 1.875rem;
+}
+
+.header-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+}
+
+.header-stats {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  color: white;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.stat-streak {
+  color: #FBBF24;
+}
+
+.stat-points {
+  color: #34D399;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: #D1D5DB;
+}
+
+/* Progress Section */
+.progress-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+.progress-card {
+  background: #1F2937;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(236, 72, 153, 0.3);
+}
+
+.progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.progress-title {
+  color: white;
+  font-weight: 600;
+}
+
+.progress-percentage {
+  color: #EC4899;
+  font-weight: 700;
+}
+
+.progress-bar-container {
+  width: 100%;
+  background: #374151;
+  border-radius: 9999px;
+  height: 0.75rem;
   overflow: hidden;
 }
 
-/* Quitamos el triángulo decorativo antiguo */
-.reto-card::after {
-  display: none;
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(to right, #EC4899, #8B5CF6);
+  border-radius: 9999px;
+  transition: width 0.3s ease;
 }
 
-/* Efecto Hover */
-.reto-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-  border-color: #ff9f43; /* Borde naranja suave al pasar el mouse */
+.progress-message {
+  margin-top: 1rem;
+  text-align: center;
 }
 
-/* Encabezado de la tarjeta (Usuario/Instructor) */
-.reto-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.user-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  /* Gradiente o imagen de fondo */
-  background: linear-gradient(135deg, #ff9f43, #ff6b6b);
-  margin-right: 12px;
-  flex-shrink: 0;
-  border: none;
-}
-
-.user-name {
-  font-size: 0.95rem;
+.progress-message span {
+  color: #FBBF24;
+  font-size: 0.875rem;
   font-weight: 600;
-  color: #b0b3b8; /* Gris claro para el subtítulo */
 }
 
-/* Nombre del Reto */
-.reto-name {
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin-bottom: 10px;
-  margin-top: 5px;
-  color: #ffffff;
-  line-height: 1.3;
+/* Stats Bar */
+.stats-bar {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
 }
 
-/* Etiquetas de Dificultad (Estilo Badges/Píldoras) */
-.reto-difficulty {
-  display: inline-block;
-  font-size: 0.8rem;
-  font-weight: 700;
-  padding: 5px 12px;
-  border-radius: 4px;
-  text-transform: uppercase;
-  margin-bottom: 15px;
-}
-
-.reto-difficulty.facil {
-  color: #2ecc71;
-  background: rgba(46, 204, 113, 0.15);
-}
-
-.reto-difficulty.medio {
-  color: #ff9f43; /* Naranja */
-  background: rgba(255, 159, 67, 0.15);
-}
-
-.reto-difficulty.dificil {
-  color: #ff6b6b; /* Rojo */
-  background: rgba(255, 107, 107, 0.15);
-}
-
-/* Contenedor de botones de acción/reacción */
-.reaction-buttons {
-  position: relative; /* Cambiado de absolute para fluidez */
-  bottom: auto;
-  right: auto;
+.stat-card {
+  background: #1F2937;
+  border-radius: 0.75rem;
+  padding: 1rem;
   display: flex;
-  justify-content: flex-end; /* Alinear a la derecha */
-  gap: 10px;
-  margin-top: 15px;
-  padding-top: 15px;
-  border-top: 1px solid #2f3338;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
-/* Botones circulares pequeños (iconos) */
-.reaction-btn {
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.stat-active {
+  border: 1px solid rgba(236, 72, 153, 0.2);
+}
+
+.stat-completed {
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.stat-pr {
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.stat-ranking {
+  border: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+.stat-icon-wrapper {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+}
+
+.stat-icon-pink {
+  background: rgba(236, 72, 153, 0.2);
+  color: #F472B6;
+}
+
+.stat-icon-purple {
+  background: rgba(139, 92, 246, 0.2);
+  color: #A78BFA;
+}
+
+.stat-icon-green {
+  background: rgba(34, 197, 94, 0.2);
+  color: #4ADE80;
+}
+
+.stat-icon-yellow {
+  background: rgba(251, 191, 36, 0.2);
+  color: #FBBF24;
+}
+
+.stat-info {
+  flex: 1;
+}
+
+.stat-number {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+}
+
+.stat-text {
+  font-size: 0.875rem;
+  color: #9CA3AF;
+}
+
+/* Categories */
+.categories-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.category-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  background: #374151;
+  color: #D1D5DB;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.category-btn:hover {
+  background: #EC4899;
+  color: white;
+}
+
+.category-active {
+  background: #EC4899;
+  color: white;
+}
+
+/* Challenges Container */
+.challenges-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+}
+
+.challenges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Challenge Card */
+.challenge-card {
+  background: #1F2937;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(236, 72, 153, 0.3);
+  transition: all 0.3s ease;
+}
+
+.challenge-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.challenge-completed {
+  background: rgba(5, 150, 105, 0.3);
+  border-color: rgba(16, 185, 129, 0.5);
+}
+
+.challenge-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.challenge-icon-wrapper {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.icon-fuerza {
+  background: rgba(236, 72, 153, 0.2);
+  color: #F472B6;
+}
+
+.icon-cardio {
+  background: rgba(34, 197, 94, 0.2);
+  color: #4ADE80;
+}
+
+.icon-hiit {
+  background: rgba(139, 92, 246, 0.2);
+  color: #A78BFA;
+}
+
+.icon-resistencia {
+  background: rgba(251, 191, 36, 0.2);
+  color: #FBBF24;
+}
+
+.icon-flexibilidad {
+  background: rgba(59, 130, 246, 0.2);
+  color: #60A5FA;
+}
+
+.difficulty-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.difficulty-fácil {
+  background: rgba(34, 197, 94, 0.3);
+  color: #86EFAC;
+}
+
+.difficulty-medio {
+  background: rgba(251, 191, 36, 0.3);
+  color: #FCD34D;
+}
+
+.difficulty-difícil {
+  background: rgba(251, 191, 36, 0.3);
+  color: #FCD34D;
+}
+
+.difficulty-extremo {
+  background: rgba(239, 68, 68, 0.3);
+  color: #FCA5A5;
+}
+
+.challenge-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.challenge-description {
+  color: #D1D5DB;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.challenge-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: #9CA3AF;
+  margin-bottom: 1rem;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.meta-points {
+  color: #FBBF24;
+}
+
+.challenge-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid #374151;
+}
+
+.category-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+}
+
+.badge-fuerza {
+  background: rgba(236, 72, 153, 0.3);
+  color: #F9A8D4;
+}
+
+.badge-cardio {
+  background: rgba(34, 197, 94, 0.3);
+  color: #86EFAC;
+}
+
+.badge-hiit {
+  background: rgba(139, 92, 246, 0.3);
+  color: #C4B5FD;
+}
+
+.badge-resistencia {
+  background: rgba(251, 191, 36, 0.3);
+  color: #FCD34D;
+}
+
+.badge-flexibilidad {
+  background: rgba(59, 130, 246, 0.3);
+  color: #93C5FD;
+}
+
+.challenge-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.like-button {
   background: transparent;
   border: none;
+  color: #9CA3AF;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0.5rem;
   border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #b0b3b8;
 }
 
-.reaction-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  transform: none;
+.like-button:hover {
+  color: #EC4899;
+  background: rgba(236, 72, 153, 0.1);
 }
 
-.reaction-btn.active {
-  color: #ff6b6b; /* Corazón rojo activo */
+.like-button.liked {
+  color: #EC4899;
 }
 
-/* Botones de Acción Principal (Estilo "Continuar" o "Unirme") */
-/* Reutilizamos las clases existentes like-btn/comment-btn para simular botones de acción */
-.action-buttons {
-  display: flex;
-  gap: 10px;
-  margin-top: auto;
-}
-
-.like-btn, .comment-btn {
-  background: #ff9f43; /* Naranja corporativo de la imagen */
+.complete-button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  background: linear-gradient(to right, #EC4899, #8B5CF6);
+  color: white;
   border: none;
-  border-radius: 6px; /* Bordes ligeramente redondeados, no redondos completos */
-  padding: 8px 20px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: #121418; /* Texto oscuro para contraste sobre naranja */
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: none;
-  display: inline-flex;
-  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
   align-items: center;
-  text-decoration: none;
+  gap: 0.25rem;
 }
 
-/* Variante secundaria para el segundo botón */
-.comment-btn {
-  background: transparent;
-  border: 1px solid #b0b3b8;
-  color: #e4e6eb;
+.complete-button:hover {
+  background: linear-gradient(to right, #DB2777, #7C3AED);
 }
 
-.like-btn:hover {
-  background: #ffb74d; /* Naranja más claro */
-  transform: translateY(-2px);
+.complete-button.completed {
+  background: #059669;
+  cursor: pointer;
 }
 
-.comment-btn:hover {
-  border-color: #ffffff;
-  background: rgba(255, 255, 255, 0.05);
+.complete-button.completed:hover {
+  background: #047857;
 }
 
 .no-retos {
   text-align: center;
   font-size: 1.2rem;
-  color: #b0b3b8;
-  margin-top: 50px;
+  color: #9CA3AF;
+  margin-top: 3rem;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .retos-title {
-    font-size: 1.5rem;
-    margin-left: 0;
-    padding-left: 10px;
+  .header-content {
+    flex-direction: column;
+    gap: 1rem;
   }
 
-  .retos-grid {
-    grid-template-columns: 1fr; /* Una columna en móvil */
-  }
-  
-  .reto-card {
+  .header-stats {
     width: 100%;
-    margin-bottom: 15px;
+    justify-content: space-around;
+  }
+
+  .stats-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .challenges-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .categories-section {
+    justify-content: flex-start;
   }
 }

@@ -13,33 +13,18 @@ body {
 
 
 .hero-section {
+  position: relative;
+  height: 100vh;
   display: flex;
   align-items: center;
-  min-height: 100vh;
-  background: none;
-  color: white;
-  padding: 0 20px;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  justify-content: center;
   background-image: url('../assets/fondo.png');
   background-size: cover;
-  background-position: center top;
+  background-position: center 65px; /* ¡Esta es la corrección! */
   background-repeat: no-repeat;
-  z-index: 1;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+  color: white;
+  text-align: center;
+  box-sizing: border-box;
 }
 
 .hero-content {
@@ -54,7 +39,7 @@ body {
   font-weight: 700;
   margin-bottom: 1.5rem;
   line-height: 1.2;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  color: #771303;
 }
 
 .hero-subtitle {
@@ -116,7 +101,7 @@ body {
 .hero-placeholder {
   text-align: center;
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(177, 15, 15, 0.794);
   border-radius: 20px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);

@@ -28,6 +28,7 @@ class UsuarioCreateView(ListCreateAPIView):
     permission_classes = [AllowAny]
 
 class ComentarioComunidadCreateView(ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = ComentarioComunidad.objects.all()
     serializer_class = ComentarioComunidadSerializer
 
@@ -78,6 +79,7 @@ class UsuarioPorId(ListCreateAPIView):
         return Usuario.objects.filter(id=id)
 
 class RetoView(ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = Retos.objects.all()
     serializer_class = RetoSerializer
 

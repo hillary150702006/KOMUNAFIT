@@ -128,14 +128,15 @@
 .entrenador-mensaje::before {
   content: '💬';
   position: absolute;
-  top: -15px;
-  left: 20px;
-  background: #1e1e1e;
-  padding: 8px;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  border: 3px solid #ffd700;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  top: 10px;
+  left: 10px;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-size: 1.2rem;
+  border: none;
+  box-shadow: none;
+  z-index: 1;
 }
 
 .entrenador-mensaje p {
@@ -143,6 +144,7 @@
   font-size: 1rem;
   line-height: 1.6;
   font-weight: 400;
+  padding-left: 25px;
 }
 
 /* Responsive Design */

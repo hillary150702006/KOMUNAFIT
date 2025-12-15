@@ -1,77 +1,74 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Perfil.css';
-import { postData, GetDataAutenticado, patchData, DeleteData, GetData } from '../services/fetch';
-import { useLocation } from "react-router-dom";
+import { GetDataAutenticado, DeleteData, GetData } from '../services/fetch';
 
 function Perfil() {
   const [isEditing, setIsEditing] = useState(false);
   const [activeTab, setActiveTab] = useState('Información Personal');
-  const [mostrarEdicion, setMostrarEdicion] = useState(false);
-  const [profileData, setProfileData] = useState([])
-  const [comentarios, setComentarios] = useState([])
+  const [profileData, setProfileData] = useState({});
+  const [comentarios, setComentarios] = useState([]);
 
-  
-  useEffect(() => {
-    const fetchComentarios = async () => {
-        try {
-          const data = await GetData('api/comentario/');
-          const userId = localStorage.getItem('id');
-          const comentariosUsuarios = data.filter(comentario => comentario.usuario === parseInt(userId));
-          setComentarios(comentariosUsuarios);
-          console.log(comentariosUsuarios);
-          
-        } catch (error) {
-          console.error("Error al obtener los comentarios:", error);
-        }
-    };
+  // Datos locales para objetivos y preferencias (placeholders o estado local)
+  const [objetivos, setObjetivos] = useState(['Ganar masa muscular', 'Mejorar resistencia', 'Entrenar 4 veces por semana']);
+  const [preferencias, setPreferencias] = useState(['Entrenamiento matutino', 'Preferencias de dieta alta en proteínas']);
+  const [newObjetivo, setNewObjetivo] = useState('');
+  const [newPreferencia, setNewPreferencia] = useState('');
 
-    fetchComentarios();
-  }, [activeTab]); 
-    useEffect(()=>{
-
-    async function fetchUserData() {
-        try {
-          const userData = await GetDataAutenticado(`api/usuario/${localStorage.getItem('id')}/`);
-       
-          if (userData) {
-            setProfileData(userData[0])
-          }
-        } catch (error) {
-          console.error("Error al obtener los datos del perfil:", error);
-        }
-      }
-      fetchUserData()
-    },[])
-  const [photoFile, setPhotoFile] = useState(null);
-  const [photoPreview, setPhotoPreview] = useState('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png');
-  const [objetivos, setObjetivos] = useState([
-  
-  ]);
-  const [preferencias, setPreferencias] = useState([
-    
-  ]);
   const [seguridad, setSeguridad] = useState({
     currentPassword: '',
     newPassword: '',
     confirmPassword: ''
   });
-  const [actividades, setActividades] = useState([
-   
-  ]);
-  const [newObjetivo, setNewObjetivo] = useState('');
-  const [newPreferencia, setNewPreferencia] = useState('');
-  const [newActividad, setNewActividad] = useState('');
-    
+
+  const [photoFile, setPhotoFile] = useState(null);
+  const [photoPreview, setPhotoPreview] = useState('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png');
+
+  // Fetch de comentarios
+  useEffect(() => {
+    const fetchComentarios = async () => {
+      try {
+        const data = await GetData('api/comentario/');
+        const userId = localStorage.getItem('id');
+        if (data && userId) {
+          const comentariosUsuarios = data.filter(comentario => String(comentario.usuario) === String(userId));
+          setComentarios(comentariosUsuarios);
+        }
+      } catch (error) {
+        console.error("Error al obtener los comentarios:", error);
+      }
+    };
+    fetchComentarios();
+  }, [activeTab]);
+
+  // Fetch de datos del usuario
+  useEffect(() => {
+    async function fetchUserData() {
+      try {
+        const userId = localStorage.getItem('id');
+        if (userId) {
+          const userData = await GetDataAutenticado(`api/usuario/${userId}/`);
+          if (userData && userData.length > 0) {
+            setProfileData(userData[0]);
+            // Si el usuario tiene foto en backend, podrías setearla aquí
+          }
+        }
+      } catch (error) {
+        console.error("Error al obtener los datos del perfil:", error);
+      }
+    }
+    fetchUserData();
+  }, []);
 
   const handleDeleteComentario = async (id) => {
-    try {
-      await DeleteData(`api/comentario/eliminar/${id}/`);
-      setComentarios(comentarios.filter(comentario => comentario.id !== id));
-    } catch (error) {
-      console.error("Error al eliminar el comentario:", error);
+    if (window.confirm("¿Eliminar este comentario?")) {
+      try {
+        await DeleteData(`api/comentario/eliminar/${id}/`);
+        setComentarios(comentarios.filter(comentario => comentario.id !== id));
+      } catch (error) {
+        console.error("Error al eliminar el comentario:", error);
+      }
     }
   };
-  
 
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
@@ -94,12 +91,9 @@ function Perfil() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
     console.log('Datos guardados:', profileData);
-    if (photoFile) {
-      console.log('Foto subida:', photoFile);
-    }
     setIsEditing(false);
+    // Aquí iría la lógica para guardar en backend (patchData, etc.)
   };
 
   const handleAddObjetivo = () => {
@@ -116,13 +110,6 @@ function Perfil() {
     }
   };
 
-  const handleAddActividad = () => {
-    if (newActividad.trim()) {
-      setActividades([newActividad, ...actividades]);
-      setNewActividad('');
-    }
-  };
-
   const handleSeguridadChange = (e) => {
     const { name, value } = e.target;
     setSeguridad(prev => ({ ...prev, [name]: value }));
@@ -132,198 +119,288 @@ function Perfil() {
     if (seguridad.newPassword === seguridad.confirmPassword && seguridad.newPassword) {
       console.log('Contraseña cambiada');
       setSeguridad({ currentPassword: '', newPassword: '', confirmPassword: '' });
+      alert("Contraseña actualizada (simulado)");
     } else {
       alert('Las contraseñas no coinciden');
     }
   };
 
-  const formatoFecha = (fecha) =>{
+  const formatoFecha = (fecha) => {
+    if (!fecha) return "Fecha desconocida";
     const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(fecha).toLocaleDateString(undefined, opciones);
   }
 
   return (
-    <div className="perfil-usuario">
-      <div className="fondo-gimnasio" />
+    <div className="perfil-page-container">
+      <div className="profile-main-container">
 
-      <div className="contenedor-perfil">
-        <div className="encabezado-perfil">
-          <img src={photoPreview} alt="Foto de perfil" className="foto-perfil" />
-          {isEditing && (
-            <div className="foto-upload">
-              <label className="upload-label">
-                Cambiar Foto
-                <input type="file" accept="image/*" onChange={handlePhotoChange} className="upload-input" />
-              </label>
+        {/* Header Section */}
+        <div className="profile-header-section">
+          <h1>MI PERFIL</h1>
+        </div>
+
+        <div className="profile-layout">
+
+          {/* Left Column: Profile Card */}
+          <div className="profile-card">
+            <div className="profile-avatar-section">
+              <img src={photoPreview} alt="Avatar" className="profile-avatar" />
+              {isEditing && (
+                <label className="upload-label">
+                  <i className="fas fa-camera"></i> Cambiar Foto
+                  <input type="file" accept="image/*" onChange={handlePhotoChange} className="upload-input" />
+                </label>
+              )}
             </div>
-          )}
-          <h2 className="nombre-usuario">{profileData.username}</h2>
-          <p className="miembro-desde">Miembro desde {formatoFecha(profileData.fecha_registro)}</p>
-        </div>
 
-        <div className="estadisticas-usuario">
-          <div className="dato"><span>Seguidos</span></div>
-          <div className="dato"><span>Asistencias</span></div>
-          <div className="dato"><span>Completadas</span></div>
-        </div>
+            <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+              <h2 className="profile-name">{profileData.nombre || 'Usuario'}</h2>
+              <div className="profile-username">@{profileData.username || 'username'}</div>
+              <p className="profile-member-since">Miembro desde {formatoFecha(profileData.fecha_registro)}</p>
+            </div>
 
-        <nav className="navegacion-perfil">
-          <button
-            className={activeTab === 'Información Personal' ? 'tab-activo' : ''}
-            onClick={() => setActiveTab('Información Personal')}
-          >
-            Información Personal
-          </button>
-          <button
-            className={activeTab === 'Objetivos y Preferencias' ? 'tab-activo' : ''}
-            onClick={() => setActiveTab('Objetivos y Preferencias')}
-          >
-            Objetivos y Preferencias
-          </button>
-          <button
-            className={activeTab === 'Seguridad' ? 'tab-activo' : ''}
-            onClick={() => setActiveTab('Seguridad')}
-          >
-            Seguridad
-          </button>
-          <button
-            className={activeTab === 'Actividad Reciente' ? 'tab-activo' : ''}
-            onClick={() => setActiveTab('Actividad Reciente')}
-          >
-            Actividad Reciente
-          </button>
-        </nav>
-          <button onClick={()=>setMostrarEdicion(!mostrarEdicion)}>Mostrar edicion</button>
-          {mostrarEdicion == true && (
-             <>
-             {activeTab === 'Información Personal' && (
-          <form className="formulario-informacion" onSubmit={handleSubmit}>
-            <label>Nombre Completo</label>
-            <input
-              type="text"
-              name="nombre"
-              value={profileData.nombre}
-              onChange={handleInputChange}
-              readOnly={!isEditing}
-            />
+            <div className="profile-stats">
+              <div className="stat-item">
+                <div className="stat-value">{comentarios.length}</div>
+                <div className="stat-label">Posts</div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-value">{objetivos.length}</div>
+                <div className="stat-label">Metas</div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-value">Active</div>
+                <div className="stat-label">Estado</div>
+              </div>
+            </div>
 
-            <label>Email</label>
-            <input
-              type="email"
-              name="email"
-              value={profileData.email}
-              onChange={handleInputChange}
-              readOnly={!isEditing}
-            />
+            <div className="profile-details">
+              <div className="detail-item">
+                <div className="detail-icon">
+                  <i className="fas fa-envelope"></i>
+                </div>
+                <div className="detail-text">
+                  <div>{profileData.email || 'email@ejemplo.com'}</div>
+                  <div className="detail-label">Email</div>
+                </div>
+              </div>
 
+              {/* Más detalles estáticos o dinámicos */}
+              <div className="detail-item">
+                <div className="detail-icon">
+                  <i className="fas fa-id-card"></i>
+                </div>
+                <div className="detail-text">
+                  <div>{profileData.id || '#'}</div>
+                  <div className="detail-label">ID Usuario</div>
+                </div>
+              </div>
 
-            <div className="botones-formulario">
-              {isEditing && <button type="submit">Guardar Cambios</button>}
-              <button type="button" onClick={handleEditToggle}>
-                {isEditing ? 'Cancelar' : 'Editar Perfil'}
+              <div className="action-buttons" style={{ marginTop: '20px' }}>
+                <button className="btn btn-secondary" onClick={handleEditToggle}>
+                  <i className={`fas ${isEditing ? 'fa-times' : 'fa-edit'}`}></i>
+                  {isEditing ? 'Cancelar Edición' : 'Editar Perfil'}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Main Content (Tabs) */}
+          <div className="main-content">
+
+            {/* Tabs Navigation */}
+            <div className="profile-tabs">
+              <button
+                className={`tab-btn ${activeTab === 'Información Personal' ? 'active' : ''}`}
+                onClick={() => setActiveTab('Información Personal')}
+              >
+                <i className="fas fa-user"></i> Información
+              </button>
+              <button
+                className={`tab-btn ${activeTab === 'Objetivos' ? 'active' : ''}`}
+                onClick={() => setActiveTab('Objetivos')}
+              >
+                <i className="fas fa-bullseye"></i> Objetivos
+              </button>
+              <button
+                className={`tab-btn ${activeTab === 'Seguridad' ? 'active' : ''}`}
+                onClick={() => setActiveTab('Seguridad')}
+              >
+                <i className="fas fa-lock"></i> Seguridad
+              </button>
+              <button
+                className={`tab-btn ${activeTab === 'Actividad' ? 'active' : ''}`}
+                onClick={() => setActiveTab('Actividad')}
+              >
+                <i className="fas fa-history"></i> Actividad
               </button>
             </div>
-          </form>
-        )}
-             </>
-          )}
-        
 
-        {activeTab === 'Objetivos y Preferencias' && (
-          <div className="contenido-tab">
-            <h3>Objetivos</h3>
-            <ul>
-              {objetivos.map((obj, index) => <li key={index}>{obj}</li>)}
-            </ul>
-            {isEditing && (
-              <div>
-                <input
-                  type="text"
-                  value={newObjetivo}
-                  onChange={(e) => setNewObjetivo(e.target.value)}
-                  placeholder="Agregar nuevo objetivo"
-                />
-                <button onClick={handleAddObjetivo}>Agregar Objetivo</button>
-              </div>
-            )}
-            <h3>Preferencias</h3>
-            <ul>
-              {preferencias.map((pref, index) => <li key={index}>{pref}</li>)}
-            </ul>
-            {isEditing && (
-              <div>
-                <input
-                  type="text"
-                  value={newPreferencia}
-                  onChange={(e) => setNewPreferencia(e.target.value)}
-                  placeholder="Agregar nueva preferencia"
-                />
-                <button onClick={handleAddPreferencia}>Agregar Preferencia</button>
-              </div>
-            )}
-          </div>
-        )}
+            {/* Tab Content Area */}
+            <div className="content-card">
 
-        {activeTab === 'Seguridad' && (
-          <div className="contenido-tab">
-            <h3>Configuración de Seguridad</h3>
-            {isEditing ? (
-              <div>
-                <label>Contraseña Actual</label>
-                <input
-                  type="password"
-                  name="currentPassword"
-                  value={seguridad.currentPassword}
-                  onChange={handleSeguridadChange}
-                  placeholder="Contraseña actual"
-                />
-                <label>Nueva Contraseña</label>
-                <input
-                  type="password"
-                  name="newPassword"
-                  value={seguridad.newPassword}
-                  onChange={handleSeguridadChange}
-                  placeholder="Nueva contraseña"
-                />
-                <label>Confirmar Nueva Contraseña</label>
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  value={seguridad.confirmPassword}
-                  onChange={handleSeguridadChange}
-                  placeholder="Confirmar nueva contraseña"
-                />
-                <button onClick={handleChangePassword}>Cambiar Contraseña</button>
-              </div>
-            ) : (
-              <p>Cambiar contraseña, activar autenticación de dos factores, etc.</p>
-            )}
-            <button onClick={() => alert('Funcionalidad de 2FA no implementada')}>Activar 2FA</button>
-          </div>
-        )}
+              {activeTab === 'Información Personal' && (
+                <div className="animate-fade-in">
+                  <div className="card-header">
+                    <h3 className="card-title">Información Personal</h3>
+                  </div>
+                  <form className="profile-form" onSubmit={handleSubmit}>
+                    <label>Nombre Completo</label>
+                    <input
+                      type="text"
+                      name="nombre"
+                      value={profileData.nombre || ''}
+                      onChange={handleInputChange}
+                      readOnly={!isEditing}
+                      placeholder="Tu nombre completo"
+                    />
 
-        {activeTab === 'Actividad Reciente' && (
-        <div className="contenido-tab">
-          <h2>Actividad Reciente</h2>
-          {comentarios.length > 0 ? (
-            <ul>
-              {comentarios.map(comentario => (
-                <li key={comentario.id}>
-                  <p><strong>Comunidad:</strong> {comentario.id}</p>
-                  <p>{comentario.comentario}</p>
-                  <button onClick={() => handleDeleteComentario(comentario.id)}>Eliminar</button>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>No has publicado ningún comentario aún.</p>
-           )}
+                    <label>Nombre de Usuario</label>
+                    <input
+                      type="text"
+                      name="username"
+                      value={profileData.username || ''}
+                      onChange={handleInputChange}
+                      readOnly={!isEditing}
+                    />
+
+                    <label>Correo Electrónico</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={profileData.email || ''}
+                      onChange={handleInputChange}
+                      readOnly={!isEditing}
+                    />
+
+                    {isEditing && (
+                      <div className="action-buttons">
+                        <button type="submit" className="btn btn-primary">
+                          <i className="fas fa-save"></i> Guardar Cambios
+                        </button>
+                      </div>
+                    )}
+                  </form>
+                </div>
+              )}
+
+              {activeTab === 'Objetivos' && (
+                <div className="animate-fade-in">
+                  <div className="card-header">
+                    <h3 className="card-title">Mis Objetivos y Preferencias</h3>
+                  </div>
+
+                  <h4 style={{ marginBottom: '10px', color: '#4ecdc4', marginTop: '20px' }}>Objetivos</h4>
+                  {objetivos.map((obj, i) => (
+                    <div key={i} className="list-item">
+                      <span>{obj}</span>
+                      {isEditing && <button onClick={() => setObjetivos(prev => prev.filter((_, idx) => idx !== i))}><i className="fas fa-trash"></i></button>}
+                    </div>
+                  ))}
+                  {isEditing && (
+                    <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
+                      <input
+                        type="text"
+                        value={newObjetivo}
+                        onChange={(e) => setNewObjetivo(e.target.value)}
+                        placeholder="Nuevo objetivo..."
+                        className="input-dark"
+                        style={{ flex: 1, padding: '10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.05)', color: 'white' }}
+                      />
+                      <button className="btn btn-primary" style={{ flex: '0 0 auto' }} onClick={handleAddObjetivo}>Agregar</button>
+                    </div>
+                  )}
+
+                  <h4 style={{ marginBottom: '10px', color: '#ff6b6b', marginTop: '30px' }}>Preferencias</h4>
+                  {preferencias.map((pref, i) => (
+                    <div key={i} className="list-item">
+                      <span>{pref}</span>
+                      {isEditing && <button onClick={() => setPreferencias(prev => prev.filter((_, idx) => idx !== i))}><i className="fas fa-trash"></i></button>}
+                    </div>
+                  ))}
+                  {isEditing && (
+                    <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
+                      <input
+                        type="text"
+                        value={newPreferencia}
+                        onChange={(e) => setNewPreferencia(e.target.value)}
+                        placeholder="Nueva preferencia..."
+                        className="input-dark"
+                        style={{ flex: 1, padding: '10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.05)', color: 'white' }}
+                      />
+                      <button className="btn btn-primary" style={{ flex: '0 0 auto' }} onClick={handleAddPreferencia}>Agregar</button>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {activeTab === 'Seguridad' && (
+                <div className="animate-fade-in">
+                  <div className="card-header">
+                    <h3 className="card-title">Configuración de Seguridad</h3>
+                  </div>
+                  {isEditing ? (
+                    <div className="profile-form">
+                      <label>Contraseña Actual</label>
+                      <input type="password" name="currentPassword" value={seguridad.currentPassword} onChange={handleSeguridadChange} placeholder="••••••••" />
+
+                      <label>Nueva Contraseña</label>
+                      <input type="password" name="newPassword" value={seguridad.newPassword} onChange={handleSeguridadChange} placeholder="••••••••" />
+
+                      <label>Confirmar Password</label>
+                      <input type="password" name="confirmPassword" value={seguridad.confirmPassword} onChange={handleSeguridadChange} placeholder="••••••••" />
+
+                      <button className="btn btn-primary" onClick={handleChangePassword} style={{ marginTop: '20px' }}>
+                        <i className="fas fa-key"></i> Actualizar Contraseña
+                      </button>
+                    </div>
+                  ) : (
+                    <div style={{ textAlign: 'center', padding: '40px', color: '#888' }}>
+                      <i className="fas fa-lock" style={{ fontSize: '40px', marginBottom: '20px', color: '#4ecdc4' }}></i>
+                      <p>Habilita el modo edición para cambiar tu contraseña.</p>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {activeTab === 'Actividad' && (
+                <div className="animate-fade-in">
+                  <div className="card-header">
+                    <h3 className="card-title">Actividad Reciente en Comunidad</h3>
+                  </div>
+                  {comentarios.length > 0 ? (
+                    <div className="activity-list">
+                      {comentarios.map(comentario => (
+                        <div key={comentario.id} className="list-item">
+                          <div style={{ flex: 1 }}>
+                            <div style={{ color: '#4ecdc4', fontSize: '0.9rem', marginBottom: '4px' }}>
+                              POST #{comentario.id}
+                            </div>
+                            <div>{comentario.comentario}</div>
+                          </div>
+                          <button onClick={() => handleDeleteComentario(comentario.id)} title="Eliminar Comentario">
+                            <i className="fas fa-trash"></i>
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div style={{ textAlign: 'center', padding: '40px', color: '#888' }}>
+                      <i className="fas fa-comment-slash" style={{ fontSize: '40px', marginBottom: '20px' }}></i>
+                      <p>No has realizado comentarios recientes.</p>
+                    </div>
+                  )}
+                </div>
+              )}
+
+            </div>
           </div>
-        )}
+
+        </div>
       </div>
     </div>
   );
 }
-        
 
 export default Perfil;
