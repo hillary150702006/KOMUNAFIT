@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-/* Configuración Global */
+
 body {
   margin: 0;
   padding: 0;
@@ -74,7 +74,7 @@ body {
 
 .stat-label {
   font-size: 0.875rem;
-  color: #D1D5DB;
+  color: #030304;
 }
 
 /* Progress Section */
@@ -118,7 +118,7 @@ body {
 
 .progress-bar {
   height: 100%;
-  background: linear-gradient(to right, #EC4899, #8B5CF6);
+  background: linear-gradient(to right, #140403, #d21d09);
   border-radius: 9999px;
   transition: width 0.3s ease;
 }
@@ -217,7 +217,7 @@ body {
 
 .stat-text {
   font-size: 0.875rem;
-  color: #9CA3AF;
+  color: #06070a;
 }
 
 /* Categories */
@@ -454,7 +454,7 @@ body {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   font-weight: 600;
-  background: linear-gradient(to right, #EC4899, #8B5CF6);
+  background: linear-gradient(to right, #de1c0e, #100f14);
   color: white;
   border: none;
   cursor: pointer;
@@ -466,16 +466,16 @@ body {
 }
 
 .complete-button:hover {
-  background: linear-gradient(to right, #DB2777, #7C3AED);
+  background: linear-gradient(to right, #0b0605, #cf3314);
 }
 
 .complete-button.completed {
-  background: #059669;
+  background: #bf310a;
   cursor: pointer;
 }
 
 .complete-button.completed:hover {
-  background: #047857;
+  background: #ab2007;
 }
 
 .no-retos {

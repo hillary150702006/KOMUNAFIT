@@ -23,11 +23,11 @@ function Perfil() {
   const [photoFile, setPhotoFile] = useState(null);
   const [photoPreview, setPhotoPreview] = useState('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png');
 
-  // Fetch de comentarios
+  // Fetch de comentarios que publico en mi comunidad
   useEffect(() => {
     const fetchComentarios = async () => {
       try {
-        const data = await GetData('api/comentario/');
+        const data = await GetDataAutenticado('api/comentario/');
         const userId = localStorage.getItem('id');
         if (data && userId) {
           const comentariosUsuarios = data.filter(comentario => String(comentario.usuario) === String(userId));

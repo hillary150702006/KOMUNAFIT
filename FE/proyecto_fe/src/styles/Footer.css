@@ -112,9 +112,15 @@
   width: 50px;
 }
 
+.social-links{
+  display: flex;
+  gap: 1rem;
+}
+
 .footer-links {
   list-style: none;
   padding: 0;
+  
 }
 
 .footer-links li {

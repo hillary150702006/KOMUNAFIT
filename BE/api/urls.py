@@ -21,7 +21,7 @@ urlpatterns = [
     path("login/", UsuarioLoginView.as_view()),
     path("usuario/<int:id>/",UsuarioPorId.as_view()),
     path("comentario/",ComentarioComunidadCreateView.as_view()),
-    path("reto/",RetoView.as_view()),
+    path("reto/",RetoView.as_view(),name="reto"),
     path("clase/",ClaseView.as_view()),
     path("comentario/eliminar/<int:id>/", EliminarComentarioComunidadView.as_view()),
 

@@ -1,54 +1,53 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/Clases.css';
-import { GetData } from '../services/fetch';
+import { GetData, postDataAutenticado } from '../services/fetch';
 import { Link } from 'react-router-dom';
 
-/*Este componente tiene como función obtener clases disponibles desde la API del backend*/
 const Clases = () => {
-    /*Por acá tiene un estado para almacenar la lista de las clases obtenidas de la API, inicializa con una array vacía para evitar errores antes de la carga */
     const [clases, setClases] = useState([]);
     const [entrenadores, setEntrenadores] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [reservedClasses, setReservedClasses] = useState(new Set());
 
+    /* ===== ESTADOS DEL MODAL (NUEVOS) ===== */
+    const [nombreClase, setNombreClase] = useState('');
+    const [descripcionClase, setDescripcionClase] = useState('');
+    const [fechaClase, setFechaClase] = useState('');
+    const [horaInicio, setHoraInicio] = useState('');
+    const [horaFin, setHoraFin] = useState('');
+    const [duracionClase, setDuracionClase] = useState('');
+    const [categoria, setCategoria] = useState('');
+
     useEffect(() => {
-        /*Por acá tiene una función asincrona , es muy útil para traer datos a un servidor  y el await para manejar operaciones como las peticiones de la API*/
-        async function traerClases() {
-            /*EL try catch es muy importante para manejar errores que puedan ocurrir durante la obtención de datos, en este caso, si hay un error al hacer la petición a la API, se captura y se muestra en la consola*/
-            try {
-                const peticion = await GetData('api/clase/');
-                setClases(peticion);
-                console.log(peticion);
-            } catch (error) {
-                console.error("Error al obtener las clases:", error);
-            }
-        }
-
-        async function traerEntrenadores() {
-            try {
-                const peticion = await GetData('api/usuario/');
-                const filtroEntrenadores = peticion.filter(
-                    (entrenador) => entrenador.rol === "entrenador"
-                );
-                setEntrenadores(filtroEntrenadores);
-                console.log("Entrenadores:", filtroEntrenadores);
-            } catch (error) {
-                console.error("Error al obtener entrenadores:", error);
-            }
-        }
-
         traerClases();
         traerEntrenadores();
     }, []);
 
+    const traerClases = async () => {
+        try {
+            const peticion = await GetData('api/clase/');
+            setClases(peticion);
+        } catch (error) {
+            console.error("Error al obtener las clases:", error);
+        }
+    };
+
+    const traerEntrenadores = async () => {
+        try {
+            const peticion = await GetData('api/usuario/');
+            const filtroEntrenadores = peticion.filter(
+                (entrenador) => entrenador.rol === "entrenador"
+            );
+            setEntrenadores(filtroEntrenadores);
+        } catch (error) {
+            console.error("Error al obtener entrenadores:", error);
+        }
+    };
+
     const handleReserve = (claseId) => {
         setReservedClasses(prev => {
             const newSet = new Set(prev);
-            if (newSet.has(claseId)) {
-                newSet.delete(claseId);
-            } else {
-                newSet.add(claseId);
-            }
+            newSet.has(claseId) ? newSet.delete(claseId) : newSet.add(claseId);
             return newSet;
         });
     };
@@ -60,23 +59,59 @@ const Clases = () => {
 
     const getStatusText = (status) => {
         const statusMap = {
-            'available': 'Disponible',
-            'full': 'Lleno',
-            'upcoming': 'Próximamente'
+            available: 'Disponible',
+            full: 'Lleno',
+            upcoming: 'Próximamente'
         };
-        return statusMap[status] || 'Disponible';
+        return statusMap[status];
+    };
+
+    /* ===== SUBMIT REAL ===== */
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const data = {
+            nombre_clase: nombreClase,
+            descripcion_clase: descripcionClase,
+            usuario: localStorage.getItem('id'),
+            fecha_clase: fechaClase,
+            hora_clase: horaInicio,
+            duracion_clase: duracionClase,
+            categoria: categoria
+        };
+
+        try {
+            await postDataAutenticado('api/clase/', data);
+            setShowModal(false);
+            traerClases();
+            limpiarFormulario();
+        } catch (error) {
+            console.error('Error al crear clase:', error);
+        }
+    };
+
+    const limpiarFormulario = () => {
+        setNombreClase('');
+        setDescripcionClase('');
+        setFechaClase('');
+        setHoraInicio('');
+        setHoraFin('');
+        setDuracionClase('');
+        setCategoria('');
     };
 
     return (
         <div className="clases-page">
-            {/* Main Content */}
             <main className="clases-main">
-                {/* Page Header con botón */}
+
+                {/* HEADER */}
                 <div className="page-header">
                     <div className="page-header-content">
                         <div>
                             <h2 className="page-title">Clases Disponibles</h2>
-                            <p className="page-subtitle">Únete a nuestras clases grupales y entrena con los mejores instructores</p>
+                            <p className="page-subtitle">
+                                Únete a nuestras clases grupales y entrena con los mejores instructores
+                            </p>
                         </div>
                         <button
                             onClick={() => setShowModal(true)}
@@ -88,57 +123,9 @@ const Clases = () => {
                     </div>
                 </div>
 
-                {/* Stats Cards */}
-                <div className="stats-grid">
-                    <div className="stat-card">
-                        <div className="stat-content">
-                            <div className="stat-icon stat-icon-blue">
-                                <i className="fas fa-calendar-check"></i>
-                            </div>
-                            <div className="stat-info">
-                                <p className="stat-label">Clases Hoy</p>
-                                <p className="stat-value">{clases.length}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="stat-card">
-                        <div className="stat-content">
-                            <div className="stat-icon stat-icon-green">
-                                <i className="fas fa-users"></i>
-                            </div>
-                            <div className="stat-info">
-                                <p className="stat-label">Inscritos</p>
-                                <p className="stat-value">{reservedClasses.size * 15}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="stat-card">
-                        <div className="stat-content">
-                            <div className="stat-icon stat-icon-purple">
-                                <i className="fas fa-user-friends"></i>
-                            </div>
-                            <div className="stat-info">
-                                <p className="stat-label">Entrenadores</p>
-                                <p className="stat-value">{entrenadores.length}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="stat-card">
-                        <div className="stat-content">
-                            <div className="stat-icon stat-icon-yellow">
-                                <i className="fas fa-star"></i>
-                            </div>
-                            <div className="stat-info">
-                                <p className="stat-label">Calificación</p>
-                                <p className="stat-value">4.8</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Classes Grid */}
+                {/* GRID */}
                 <div className="classes-grid">
-                    {Array.isArray(clases) && clases.map((clase, index) => {
+                    {clases.map((clase, index) => {
                         const status = getClassStatus(index);
                         const isReserved = reservedClasses.has(clase.id);
 
@@ -155,43 +142,13 @@ const Clases = () => {
                                         </span>
                                     </div>
 
-                                    <div className="class-details">
-                                        <div className="detail-item">
-                                            <i className="fas fa-user"></i>
-                                            <span>{clase.usuario || 'Instructor'}</span>
-                                        </div>
-                                        <div className="detail-item">
-                                            <i className="fas fa-clock"></i>
-                                            <span>{clase.hora_clase || '18:00 - 19:00'}</span>
-                                        </div>
-                                        <div className="detail-item">
-                                            <i className="fas fa-calendar"></i>
-                                            <span>{clase.fecha_clase || 'Lun, Mié, Vie'}</span>
-                                        </div>
-                                        <div className="detail-item">
-                                            <i className="fas fa-users"></i>
-                                            <span>{Math.floor(Math.random() * 15) + 5}/20 participantes</span>
-                                        </div>
-                                    </div>
-
                                     <div className="class-footer">
-                                        {status === 'full' ? (
-                                            <button className="btn-reserve btn-disabled" disabled>
-                                                Clase Llena
-                                            </button>
-                                        ) : status === 'upcoming' ? (
-                                            <button className="btn-reserve btn-notify">
-                                                Notificarme
-                                            </button>
-                                        ) : (
-                                            <button
-                                                className={`btn-reserve ${isReserved ? 'btn-reserved' : ''}`}
-                                                onClick={() => handleReserve(clase.id)}
-                                            >
-                                                <i className={`fas fa-${isReserved ? 'check' : 'calendar-plus'}`}></i>
-                                                {isReserved ? 'Reservado' : 'Reservar Lugar'}
-                                            </button>
-                                        )}
+                                        <button
+                                            className={`btn-reserve ${isReserved ? 'btn-reserved' : ''}`}
+                                            onClick={() => handleReserve(clase.id)}
+                                        >
+                                            {isReserved ? 'Reservado' : 'Reservar Lugar'}
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -200,70 +157,53 @@ const Clases = () => {
                 </div>
             </main>
 
-            {/* Create Class Modal */}
+            {/* ===== MODAL (MISMO DISEÑO) ===== */}
             {showModal && (
                 <div className="modal-overlay" onClick={() => setShowModal(false)}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                         <div className="modal-header">
                             <h3 className="modal-title">Crear Nueva Clase</h3>
-                            <button
-                                className="modal-close"
-                                onClick={() => setShowModal(false)}
-                            >
+                            <button className="modal-close" onClick={() => setShowModal(false)}>
                                 <i className="fas fa-times"></i>
                             </button>
                         </div>
 
-                        <form className="modal-form" onSubmit={(e) => {
-                            e.preventDefault();
-                            setShowModal(false);
-                        }}>
+                        <form className="modal-form" onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <label className="form-label">Nombre de la Clase *</label>
                                 <input
                                     type="text"
                                     className="form-input"
-                                    placeholder="Ej: HIIT Quemagrasa"
+                                    value={nombreClase}
+                                    onChange={(e) => setNombreClase(e.target.value)}
                                     required
                                 />
                             </div>
 
-                            <div className="form-row">
-                                <div className="form-group">
-                                    <label className="form-label">Instructor *</label>
-                                    <select className="form-input" required>
-                                        <option value="">Seleccionar instructor</option>
-                                        {entrenadores.map(ent => (
-                                            <option key={ent.id} value={ent.id}>
-                                                {ent.first_name}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-
-                                <div className="form-group">
-                                    <label className="form-label">Categoría *</label>
-                                    <select className="form-input" required>
-                                        <option value="">Seleccionar categoría</option>
-                                        <option value="fuerza">Fuerza</option>
-                                        <option value="cardio">Cardio</option>
-                                        <option value="hiit">HIIT</option>
-                                        <option value="yoga">Yoga</option>
-                                        <option value="pilates">Pilates</option>
-                                        <option value="funcional">Funcional</option>
-                                    </select>
-                                </div>
+                            <div className="form-group">
+                                <label className="form-label">Categoría *</label>
+                                <select
+                                    className="form-input"
+                                    value={categoria}
+                                    onChange={(e) => setCategoria(e.target.value)}
+                                    required
+                                >
+                                    <option value="">Seleccionar</option>
+                                    <option value="fuerza">Fuerza</option>
+                                    <option value="cardio">Cardio</option>
+                                    <option value="hiit">HIIT</option>
+                                    <option value="yoga">Yoga</option>
+                                </select>
                             </div>
 
                             <div className="form-row">
                                 <div className="form-group">
-                                    <label className="form-label">Capacidad *</label>
+                                    <label className="form-label">Fecha *</label>
                                     <input
-                                        type="number"
-                                        min="1"
-                                        max="50"
+                                        type="date"
                                         className="form-input"
-                                        placeholder="20"
+                                        value={fechaClase}
+                                        onChange={(e) => setFechaClase(e.target.value)}
                                         required
                                     />
                                 </div>
@@ -273,6 +213,8 @@ const Clases = () => {
                                     <input
                                         type="time"
                                         className="form-input"
+                                        value={horaInicio}
+                                        onChange={(e) => setHoraInicio(e.target.value)}
                                         required
                                     />
                                 </div>
@@ -282,27 +224,36 @@ const Clases = () => {
                                     <input
                                         type="time"
                                         className="form-input"
+                                        value={horaFin}
+                                        onChange={(e) => setHoraFin(e.target.value)}
                                         required
                                     />
                                 </div>
                             </div>
 
                             <div className="form-group">
+                                <label className="form-label">Duración *</label>
+                                <input
+                                    type="number"
+                                    className="form-input"
+                                    value={duracionClase}
+                                    onChange={(e) => setDuracionClase(e.target.value)}
+                                    required
+                                />
+                            </div>
+
+                            <div className="form-group">
                                 <label className="form-label">Descripción *</label>
                                 <textarea
                                     className="form-input form-textarea"
-                                    rows="3"
-                                    placeholder="Describe la clase, ejercicios, nivel de dificultad, etc."
+                                    value={descripcionClase}
+                                    onChange={(e) => setDescripcionClase(e.target.value)}
                                     required
-                                ></textarea>
+                                />
                             </div>
 
                             <div className="form-actions">
-                                <button
-                                    type="button"
-                                    className="btn-cancel"
-                                    onClick={() => setShowModal(false)}
-                                >
+                                <button type="button" className="btn-cancel" onClick={() => setShowModal(false)}>
                                     Cancelar
                                 </button>
                                 <button type="submit" className="btn-submit">

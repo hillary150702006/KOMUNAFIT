@@ -1,4 +1,4 @@
-pe
+
 body {
   margin: 0;
   padding: 0;
@@ -7,39 +7,48 @@ body {
   background-color: #f8f9fa;
 }
 
-.inicio-container {
-  min-height: 100vh;
-}
-
-
 .hero-section {
   position: relative;
   height: 100vh;
   display: flex;
   align-items: center;
+  min-height: 100vh;
+  background: none;
+  color: white;
+  padding: 0 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   justify-content: center;
   background-image: url('../assets/fondo.png');
   background-size: cover;
-  background-position: center 65px; /* ¡Esta es la corrección! */
+  background-position: center top;
+  background-position: center 65px; 
   background-repeat: no-repeat;
-  color: white;
-  text-align: center;
-  box-sizing: border-box;
+  z-index: 1;
 }
 
 .hero-content {
-  flex: 1;
   max-width: 600px;
   z-index: 2;
   position: relative;
 }
 
-.hero-title {
+.herotitulo {
   font-size: 3.5rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
   line-height: 1.2;
-  color: #771303;
+  color: #f3ebeb
 }
 
 .hero-subtitle {
@@ -130,7 +139,7 @@ body {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 3rem;
-  color: #333;
+  color: #090505;
 }
 
 .features-grid {
@@ -142,7 +151,7 @@ body {
 }
 
 .feature-card {
-  background: #f8f9fa;
+ background: linear-gradient(135deg, #111827 0%, #ff3212 100%);
   padding: 2rem;
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
@@ -163,18 +172,18 @@ body {
   font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: #333;
+  color: #faf5f5;
 }
 
 .feature-card p {
-  color: #666;
+  color: #fffefe;
   line-height: 1.6;
 }
 
 
 .stats-section {
   padding: 60px 20px;
-  background: linear-gradient(135deg, #ff6b35 0%, #771303 100%);
+  background: linear-gradient(135deg, #111827 0%, #ff3212 100%);
   color: white;
 }
 
@@ -195,13 +204,14 @@ body {
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: #eee5e2;
+  color: #0e0603;
 }
 
 .stat-label {
   font-size: 1.1rem;
   font-weight: 300;
   opacity: 0.9;
+  color: #eee5e2;
 }
 
 

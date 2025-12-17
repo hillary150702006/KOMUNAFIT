@@ -52,7 +52,7 @@
 .hero-title {
   font-size: 3rem;
   font-weight: 900;
-  background: linear-gradient(135deg, #111827 0%, #374151 100%);
+  background: linear-gradient(135deg, #101114 0%, #c22d0c 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -67,7 +67,7 @@
 }
 
 .hero-subtitle {
-  color: #6b7280;
+  color: #060709;
   font-size: 1.25rem;
   max-width: 48rem;
   margin: 0 auto;

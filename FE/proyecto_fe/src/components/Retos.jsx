@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { GetData, GetDataAutenticado } from '../services/fetch';
-import { Link } from 'react-router-dom';
+import { GetDataAutenticado } from '../services/fetch';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Retos.css';
 
 const Retos = () => {
@@ -9,6 +9,7 @@ const Retos = () => {
   const [reactions, setReactions] = useState({});
   const [completedRetos, setCompletedRetos] = useState(new Set());
   const [activeCategory, setActiveCategory] = useState('todos');
+  const navigate = useNavigate();
 
   const userNames = ['Alex', 'Maria', 'Carlos', 'Sofia', 'Juan', 'Laura', 'Pedro', 'Ana', 'Luis', 'Carmen'];
 
@@ -24,10 +25,14 @@ const Retos = () => {
         console.log(peticion);
       } catch (error) {
         console.error("Error al obtener los retos:", error);
+        if (error.message.includes('401')) {
+          localStorage.removeItem('token');
+          navigate('/login');
+        }
       }
     }
     traerRetos();
-  }, []);
+  }, [navigate]);
 
   const handleLike = (retoId) => {
     setLikedRetos(prev => {
@@ -209,9 +214,7 @@ const Retos = () => {
                     <div className={`challenge-icon-wrapper icon-${category.toLowerCase()}`}>
                       <i className={`fas fa-${category === 'Fuerza' ? 'dumbbell' : category === 'Cardio' ? 'running' : category === 'HIIT' ? 'fire' : 'heart'}`}></i>
                     </div>
-                    <div className={`difficulty-badge difficulty-${difficulty.toLowerCase()}`}>
-                      {isCompleted ? <><i className="fas fa-check"></i> Completado</> : difficulty}
-                    </div>
+                    <div className={`difficulty-badge difficulty-${difficulty.toLowerCase()}`}>                    {isCompleted ? <><i className="fas fa-check"></i> Completado</> : difficulty}                  </div>
                   </div>
 
                   <h3 className="challenge-title">{reto.nombre_reto}</h3>
@@ -231,9 +234,7 @@ const Retos = () => {
                   </div>
 
                   <div className="challenge-footer">
-                    <span className={`category-badge badge-${category.toLowerCase()}`}>
-                      {category}
-                    </span>
+                    <span className={`category-badge badge-${category.toLowerCase()}`}>         {category}                   </span>
                     <div className="challenge-actions">
                       <button
                         className={`like-button ${isLiked ? 'liked' : ''}`}

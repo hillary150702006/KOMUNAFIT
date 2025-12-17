@@ -22,8 +22,8 @@ const Inicio = () => {
     
       <section className="hero-section">
         <div className="hero-content">
-          <h1 className="hero-title">TRAIN HARD </h1>
-          <h2 className="hero-subtitle">Entrenamiento profesional, comunidad motivadora y resultados reales</h2>
+          <h1 className="herotitulo">TRAIN HARD </h1>
+          <h2 className="herodescripcion">Entrenamiento profesional, comunidad motivadora y resultados reales</h2>
           <div className="hero-buttons">
             <button className="cta-button primary" onClick={handleJoinNow}>Únete Ahora</button>
             <button className="cta-button secondary" onClick={handleViewClasses}>Ver Clases</button>
